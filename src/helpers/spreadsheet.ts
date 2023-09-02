@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from './helpers/example-module';
-import { getMail } from './helpers/get-gmail';
-
-console.log(getMail());
-console.log(hello());
+export function getSheet(name: string): GoogleAppsScript.Spreadsheet.Sheet {
+  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = spreadsheet.getSheetByName(name);
+  if (sheet !== null) return sheet;
+  return spreadsheet.insertSheet().setName(name);
+}
