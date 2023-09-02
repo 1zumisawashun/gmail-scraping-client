@@ -15,29 +15,46 @@
  */
 import { searchGmail } from './search-gmail';
 import { formatDateFullYearMonthDateTime } from '@/functions/helpers';
+import { angleBracketPattern, emailPattern } from '@/functions/constants';
+
+// FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
+const getGmailEmail = ({ from }: { from: string }) => {
+  const angleBracketMatches = from.match(angleBracketPattern);
+
+  if (angleBracketMatches) {
+    const emailMatches = angleBracketMatches[0].match(emailPattern);
+    if (emailMatches) {
+      return emailMatches[0];
+    } else {
+      console.log('メールアドレスが見つかりませんでした。');
+      return from;
+    }
+  } else {
+    console.log("'<...>' 形式のテキストが見つかりませんでした。");
+    return from;
+  }
+};
 
 export function getMail() {
-  // 現在時刻から1時間以内のものを全て取得する
-  // 件名は関係なし
-  // 取得したものをメールアドレスで分類する
-  // メールアドレスをファイル名にする
-  // 時間でタブに分ける
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
-
   console.log('●対象スレッド数: ' + threads.length);
+
+  const params = [];
 
   for (const thread of messagesForThreads) {
     console.log('○スレッド内のメール数:' + thread.length);
     for (const message of thread) {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDateTime({ date });
-      const Subject = message.getSubject();
-      const PlainBody = message.getPlainBody();
+      const from = message.getFrom();
+      const email = getGmailEmail({ from });
+      const subject = message.getSubject();
+      // const plainBody = message.getPlainBody();
 
-      console.log('受信日時:' + strDate);
-      console.log('メール件名:' + Subject);
-      console.log('メール本文:' + PlainBody);
+      params.push({ date: strDate, email, subject });
     }
   }
+
+  return params;
 }

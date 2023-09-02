@@ -13,14 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello, logger } from '@/functions/helpers';
-import { getMail } from '@/features/gmail/hooks/get-gmail';
+// NOTE:'<...>' 形式の部分を抽出する正規表現パターン
+export const angleBracketPattern = /<([^>]+)>/g;
 
-/* eslint-disable */
-const main = () => {
-  hello();
-  const res = getMail();
-  logger(res);
-};
-
-main();
+// NOTE:メールアドレスの部分だけを抽出する正規表現パターン
+export const emailPattern =
+  /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b/g;

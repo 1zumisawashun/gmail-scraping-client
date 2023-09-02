@@ -13,14 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello, logger } from '@/functions/helpers';
-import { getMail } from '@/features/gmail/hooks/get-gmail';
-
-/* eslint-disable */
-const main = () => {
-  hello();
-  const res = getMail();
-  logger(res);
+export const logger = (obj: unknown) => {
+  console.log(JSON.parse(JSON.stringify(obj)));
 };
-
-main();

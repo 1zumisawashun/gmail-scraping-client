@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 export function searchGmail() {
-  // Gmailから特定条件のスレッドを検索しメールを取り出す
-
   //受信日時指定
   const date = new Date(); //現在時刻を取得
   const unixTime = date.getTime(); //UNIX TIMEに変換
   const now = Math.floor(unixTime / 1000); //ミリ秒を秒に変換
-  const term = now - 3600; //現在時刻から60分（3600秒）前
+  const term = now - 60 * 60 * 24; //現在時刻から1日前
   const termStr = term.toString(); //検索期間を文字列に変換
 
   // const strTerms = 'after:' + termStr + ' ' + searchCondition; //検索条件：termの期間に、searchConditionの条件に合致するメール

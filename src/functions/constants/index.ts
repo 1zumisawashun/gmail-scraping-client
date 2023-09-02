@@ -13,14 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello, logger } from '@/functions/helpers';
-import { getMail } from '@/features/gmail/hooks/get-gmail';
-
-/* eslint-disable */
-const main = () => {
-  hello();
-  const res = getMail();
-  logger(res);
-};
-
-main();
+export { angleBracketPattern, emailPattern } from './regex';
