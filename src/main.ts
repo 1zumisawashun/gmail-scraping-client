@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 import { hello } from './functions/helpers/example-module';
-// import { getMail } from './helpers/get-gmail';
-// import { getSheet } from './helpers/get-spreadsheet';
 import { getMail } from './features/gmail/hooks/get-gmail';
 
-// console.log(getMail());
-console.log(hello());
+/* eslint-disable */
+const main = () => {
+  console.log(hello());
+  console.log(getMail());
+};
 
-// const response = getSheet('gmail-scraping-client');
-// console.log(response);
-
-console.log(getMail());
+(global as any).doPost = main;

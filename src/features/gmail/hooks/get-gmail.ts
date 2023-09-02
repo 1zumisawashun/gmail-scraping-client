@@ -23,14 +23,6 @@ export function getMail() {
   // メールアドレスをファイル名にする
   // 時間でタブに分ける
   const threads = searchGmail();
-  // const res = threads.map(thread => {
-  //   return thread.getMessages().map(message => {
-  //     console.log(message.getFrom());
-  //     return message.getFrom();
-  //   });
-  // });
-
-  // console.log(JSON.parse(JSON.stringify(res)), 'myThreads1');
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
   console.log('●対象スレッド数: ' + threads.length);
