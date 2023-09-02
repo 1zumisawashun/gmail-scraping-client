@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from './functions/helpers/example-module';
-// import { getMail } from './helpers/get-gmail';
-// import { getSheet } from './helpers/get-spreadsheet';
-import { getMail } from './features/gmail/hooks/get-gmail';
-
-// console.log(getMail());
-console.log(hello());
-
-// const response = getSheet('gmail-scraping-client');
-// console.log(response);
-
-console.log(getMail());
+//検索条件指定
+export const searchCondition = [
+  //検索条件を配列で格納
+  '（検索条件その1）',
+  '（検索条件その2）',
+].join('\u0020'); //半角スペースで連結

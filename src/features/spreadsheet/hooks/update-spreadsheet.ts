@@ -13,15 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from './functions/helpers/example-module';
-// import { getMail } from './helpers/get-gmail';
-// import { getSheet } from './helpers/get-spreadsheet';
-import { getMail } from './features/gmail/hooks/get-gmail';
-
-// console.log(getMail());
-console.log(hello());
-
-// const response = getSheet('gmail-scraping-client');
-// console.log(response);
-
-console.log(getMail());
