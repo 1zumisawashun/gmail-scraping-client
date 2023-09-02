@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from './functions/helpers/example-module';
-import { getMail } from './features/gmail/hooks/get-gmail';
+import { hello } from '@/functions/helpers';
+import { getMail } from '@/features/gmail/hooks/get-gmail';
 
 /* eslint-disable */
 const main = () => {
-  console.log(hello());
-  console.log(getMail());
+  hello();
+  getMail();
 };
 
 main();

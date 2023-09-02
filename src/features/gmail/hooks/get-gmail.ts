@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { searchGmail } from './search-gmail';
-import { formatDateFullYearMonthDateTime } from '../../../functions/helpers/format-date';
+import { formatDateFullYearMonthDateTime } from '@/functions/helpers';
 
 export function getMail() {
   // 現在時刻から1時間以内のものを全て取得する
