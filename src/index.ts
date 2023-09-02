@@ -22,4 +22,4 @@ const main = () => {
   console.log(getMail());
 };
 
-(global as any).doPost = main;
+main();
