@@ -27,7 +27,7 @@
     "no-unreachable-loop": "off",
     // eslint-config-airbnb（eslint-plugin-import)
     "import/prefer-default-export": "off",
-    "import/extensions": "off",
+    "import/extensions": "off", // NOTE:rollupの設定が原因な気がする
     // eslint-config-airbnb-typescript（eslint-typescript）
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-expressions": [
