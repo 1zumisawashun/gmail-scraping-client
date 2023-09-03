@@ -15,8 +15,7 @@
     "allowUnusedLabels": false,
     "baseUrl": ".",
     "paths": {
-      "@/functions/*": ["src/functions/*"],
-      "@/features/*": ["src/features/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*", "test/**/*", "rollup.config.mjs"]

@@ -15,11 +15,8 @@
  */
 import { hello, logger } from '@/functions/helpers';
 import { getGmail } from '@/features/gmail/hooks';
-import {
-  getSpreadsheet,
-  getSheet,
-  updateSheet,
-} from '@/features/spreadsheet/hooks';
+import { getSpreadsheet } from '@/features/spreadsheet/hooks';
+import { getSheet, updateSheet } from '@/features/sheet/hooks';
 
 const main = () => {
   hello();

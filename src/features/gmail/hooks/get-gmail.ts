@@ -28,25 +28,24 @@ const getGmailEmail = ({ from }: { from: string }) => {
     const emailMatches = angleBracketMatches[0].match(emailPattern);
     if (emailMatches) {
       return emailMatches[0];
-    } else {
-      console.log('メールアドレスが見つかりませんでした。');
-      return from;
     }
-  } else {
-    console.log("'<...>' 形式のテキストが見つかりませんでした。");
+    console.log('メールアドレスが見つかりませんでした。');
     return from;
   }
+  console.log("'<...>' 形式のテキストが見つかりませんでした。");
+  return from;
 };
 
+/* eslint-disable */
 export function getGmail() {
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
-  console.log('●対象スレッド数: ' + threads.length);
+  console.log(`●対象スレッド数: ${threads.length}`);
 
   const params = [];
 
   for (const thread of messagesForThreads) {
-    console.log('○スレッド内のメール数:' + thread.length);
+    console.log(`○スレッド内のメール数:${thread.length}`);
     for (const message of thread) {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });

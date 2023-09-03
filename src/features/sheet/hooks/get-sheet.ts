@@ -13,9 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// 検索条件指定
-export const searchCondition = [
-  // 検索条件を配列で格納
-  '（検索条件その1）',
-  '（検索条件その2）',
-].join('\u0020'); // 半角スペースで連結
+import { createSheet } from './create-sheet';
+
+export const getSheet = ({
+  date,
+  spreadsheet,
+}: {
+  date: string;
+  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
+}) => {
+  if (!spreadsheet) {
+    // sendToSlack(params, "spreadsheetが見つからなかったかに！");
+    return undefined;
+  }
+
+  const sheet = spreadsheet.getSheetByName(date);
+
+  if (!sheet) {
+    const newSheet = createSheet(date, spreadsheet);
+    return newSheet;
+  }
+
+  return sheet;
+};

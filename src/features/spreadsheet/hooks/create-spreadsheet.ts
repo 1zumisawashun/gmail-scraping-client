@@ -27,6 +27,5 @@ export const createSpreadsheet = ({ email }: { email: string }) => {
     const copiedFile = file.makeCopy(email, folder);
     return SpreadsheetApp.openById(copiedFile.getId());
   }
-
-  return;
+  return undefined;
 };

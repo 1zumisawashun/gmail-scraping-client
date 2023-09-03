@@ -4,7 +4,12 @@
     "node": true,
     "es2020": true
   },
-  "extends": ["./node_modules/gts", "prettier"],
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "./node_modules/gts",
+    "prettier"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -12,8 +17,24 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["prettier"],
+
   "rules": {
-    "prettier/prettier": "error"
+    // eslint-config-airbnb（eslint)
+    "spaced-comment": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "arrow-body-style": "off",
+    "no-unreachable-loop": "off",
+    // eslint-config-airbnb（eslint-plugin-import)
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    // eslint-config-airbnb-typescript（eslint-typescript）
+    "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      { "allowTernary": true }
+    ],
+    "@typescript-eslint/no-unused-vars": "off"
   },
   "ignorePatterns": ["template/**/*"]
 }
