@@ -7,13 +7,17 @@
   "keywords": [],
   "scripts": {
     "clean": "rimraf build dist",
-    "lint": "npm run license && eslint --fix --no-error-on-unmatched-pattern src/ test/",
+    "lint:js:fix": "eslint --fix --no-error-on-unmatched-pattern src/ test/",
+    "format:fix": "prettier --write src/",
+    "compile": "tsc --pretty --noEmit",
     "bundle": "rollup --no-treeshake -c rollup.config.mjs",
     "build": "npm run clean && npm run bundle && ncp appsscript.json dist/appsscript.json",
     "license": "license-check-and-add add -f license-config.json",
     "test": "jest test/ --passWithNoTests --detectOpenHandles",
-    "deploy": "npm run lint && npm run test && npm run build && ncp .clasp-dev.json .clasp.json && clasp push -f",
-    "deploy:prod": "npm run lint && npm run test && npm run build && ncp .clasp-prod.json .clasp.json && clasp push"
+    "deploy": "npm run lint:js:fix && npm run test && npm run build && ncp .clasp-dev.json .clasp.json && clasp push -f",
+    "deploy:prod": "npm run lint:js:fix && npm run test && npm run build && ncp .clasp-prod.json .clasp.json && clasp push",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "engines": {
     "node": ">=12"
@@ -38,5 +42,9 @@
     "rollup-plugin-typescript2": "^0.35.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
+  },
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1"
   }
 }
