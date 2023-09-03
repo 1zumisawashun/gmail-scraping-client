@@ -19,7 +19,9 @@ gmail-scraping-clientのリポジトリです
 
 ## Overview
 
-Google Apps Scriptでgmailのスクレイピングをします
+- Google Apps ScriptでGmailをスクレイピングをします
+- スクレイピングしたGmailの情報をスプシに転記しDBを作ります
+- DBから条件によって取得したいメールを出し訳します
 
 ## Installation
 
