@@ -13,3 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {
+  GMAIL_SCRAPING_CLIENT_FOLDER_ID,
+  COPY_NAME,
+} from '@/functions/constants';
+
+export const createSpreadsheet = ({ email }: { email: string }) => {
+  const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
+  const files = folder.getFilesByName(COPY_NAME);
+
+  while (files.hasNext()) {
+    const file = files.next();
+    const copiedFile = file.makeCopy(email, folder);
+    return SpreadsheetApp.openById(copiedFile.getId());
+  }
+
+  return;
+};

@@ -18,7 +18,7 @@ export function searchGmail() {
   const date = new Date(); //現在時刻を取得
   const unixTime = date.getTime(); //UNIX TIMEに変換
   const now = Math.floor(unixTime / 1000); //ミリ秒を秒に変換
-  const term = now - 60 * 60 * 24; //現在時刻から1日前
+  const term = now - 60 * 60 * 48; //現在時刻から2日前
   const termStr = term.toString(); //検索期間を文字列に変換
 
   // const strTerms = 'after:' + termStr + ' ' + searchCondition; //検索条件：termの期間に、searchConditionの条件に合致するメール

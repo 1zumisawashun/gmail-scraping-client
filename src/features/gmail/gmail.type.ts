@@ -13,3 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+export type Gmail = {
+  date: string;
+  datetime: string;
+  email: string;
+  subject: string;
+};

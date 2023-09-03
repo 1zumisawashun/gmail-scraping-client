@@ -14,5 +14,8 @@
  * limitations under the License.
  */
 export { hello } from './example-module';
-export { formatDateFullYearMonthDateTime } from './format-date';
+export {
+  formatDateFullYearMonthDateTime,
+  formatDateFullYearMonthDate,
+} from './format-date';
 export { logger } from './debug-log';

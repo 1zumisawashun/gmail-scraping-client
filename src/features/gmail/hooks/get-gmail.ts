@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 import { searchGmail } from './search-gmail';
-import { formatDateFullYearMonthDateTime } from '@/functions/helpers';
+import {
+  formatDateFullYearMonthDateTime,
+  formatDateFullYearMonthDate,
+} from '@/functions/helpers';
 import { angleBracketPattern, emailPattern } from '@/functions/constants';
 
 // FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
@@ -35,7 +38,7 @@ const getGmailEmail = ({ from }: { from: string }) => {
   }
 };
 
-export function getMail() {
+export function getGmail() {
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
   console.log('●対象スレッド数: ' + threads.length);
@@ -46,13 +49,14 @@ export function getMail() {
     console.log('○スレッド内のメール数:' + thread.length);
     for (const message of thread) {
       const date = message.getDate();
-      const strDate = formatDateFullYearMonthDateTime({ date });
+      const strDate = formatDateFullYearMonthDate({ date });
+      const strDatetime = formatDateFullYearMonthDateTime({ date });
       const from = message.getFrom();
       const email = getGmailEmail({ from });
       const subject = message.getSubject();
       // const plainBody = message.getPlainBody();
 
-      params.push({ date: strDate, email, subject });
+      params.push({ date: strDate, datetime: strDatetime, email, subject });
     }
   }
 

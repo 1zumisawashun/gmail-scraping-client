@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 import { hello, logger } from '@/functions/helpers';
-import { getMail } from '@/features/gmail/hooks/get-gmail';
+import { getGmail } from '@/features/gmail/hooks';
+import {
+  getSpreadsheet,
+  getSheet,
+  updateSheet,
+} from '@/features/spreadsheet/hooks';
 
-/* eslint-disable */
 const main = () => {
   hello();
-  const res = getMail();
-  logger(res);
+
+  const gmails = getGmail();
+  logger(gmails);
+
+  gmails.forEach(gmail => {
+    const { email, date } = gmail;
+    const spreadsheet = getSpreadsheet({ email });
+    const sheet = getSheet({ date, spreadsheet });
+    updateSheet({ gmail, sheet });
+  });
 };
 
 main();
