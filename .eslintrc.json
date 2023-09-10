@@ -17,7 +17,6 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["prettier"],
-
   "rules": {
     // eslint-config-airbnb（eslint)
     "spaced-comment": "off",
@@ -27,7 +26,7 @@
     "no-unreachable-loop": "off",
     // eslint-config-airbnb（eslint-plugin-import)
     "import/prefer-default-export": "off",
-    "import/extensions": "off", // NOTE:rollupの設定が原因な気がする
+    "import/extensions": "off", // NOTE:eslint-config-airbnb-typescriptで設定しているのになんでだ？
     // eslint-config-airbnb-typescript（eslint-typescript）
     "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-unused-expressions": [
