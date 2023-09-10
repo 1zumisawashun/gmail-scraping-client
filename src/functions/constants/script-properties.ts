@@ -22,5 +22,3 @@ export const SLACK_INCOMING_WEBHOOKS =
   PropertiesService.getScriptProperties().getProperty(
     'SLACK_INCOMING_WEBHOOKS'
   );
-
-export const COPY_NAME = 'コピー（削除厳禁）';

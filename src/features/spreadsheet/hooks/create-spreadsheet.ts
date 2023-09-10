@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  GMAIL_SCRAPING_CLIENT_FOLDER_ID,
-  COPY_NAME,
-} from '@/functions/constants';
+import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
 
 export const createSpreadsheet = ({ date }: { date: string }) => {
@@ -25,7 +22,7 @@ export const createSpreadsheet = ({ date }: { date: string }) => {
     return undefined;
   }
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
-  const files = folder.getFilesByName(COPY_NAME);
+  const files = folder.getFilesByName('コピー（削除厳禁）');
 
   while (files.hasNext()) {
     const file = files.next();
