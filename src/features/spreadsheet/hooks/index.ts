@@ -15,3 +15,4 @@
  */
 export { createSpreadsheet } from './create-spreadsheet';
 export { getSpreadsheet } from './get-spreadsheet';
+export { deleteSpreadsheet } from './delete-spreadsheet';

@@ -15,15 +15,18 @@
  */
 
 import { getGmail } from '@/features/gmail/hooks';
-import { getSpreadsheet } from '@/features/spreadsheet/hooks';
+import {
+  getSpreadsheet,
+  deleteSpreadsheet,
+} from '@/features/spreadsheet/hooks';
 import { getSheet, updateSheet } from '@/features/sheet/hooks';
-import { hello, sendToSlack } from '@/functions/helpers';
+import { hello, sendToSlack, getOneWeekAgo } from '@/functions/helpers';
 
 const main = () => {
   hello();
 
   const gmails = getGmail();
-  sendToSlack(`取得数は${gmails.length}件だったワン`);
+  sendToSlack(`取得数は${gmails.length}件だったワン🐶`);
 
   gmails.forEach(gmail => {
     const { date } = gmail;
@@ -31,6 +34,9 @@ const main = () => {
     const sheet = getSheet({ date, spreadsheet });
     updateSheet({ gmail, sheet });
   });
+
+  const oneWeekAgo = getOneWeekAgo();
+  deleteSpreadsheet({ filename: oneWeekAgo });
 };
 
 main();

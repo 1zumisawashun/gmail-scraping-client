@@ -25,6 +25,17 @@ export const formatDateFullYearMonthDate = ({
   date: GoogleAppsScript.Base.Date;
 }) => Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
 
+export const getOneWeekAgo = () => {
+  const date = new Date();
+  const day = date.getDate();
+
+  date.setDate(day - 7);
+
+  const oneWeekAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+  return oneWeekAgo;
+};
+
+// NOTE:kanisan-clientから引っ張ってきた。必要なければ削除する
 export const getFormattedDate = (params: any) => {
   const eventTs = params.event.event_ts;
   const now = new Date(eventTs * 1000);

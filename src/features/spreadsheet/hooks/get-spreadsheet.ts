@@ -15,11 +15,15 @@
  */
 import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
 import { createSpreadsheet } from './create-spreadsheet';
+import { sendToSlack } from '@/functions/helpers';
 
 export const getSpreadsheet = ({ date }: { date: string }) => {
-  const folderId = GMAIL_SCRAPING_CLIENT_FOLDER_ID;
+  if (!GMAIL_SCRAPING_CLIENT_FOLDER_ID) {
+    sendToSlack('エラーが発生したワン🐶');
+    return undefined;
+  }
 
-  const folder = DriveApp.getFolderById(folderId);
+  const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const files = folder.getFilesByName(date);
 
   while (files.hasNext()) {
@@ -27,6 +31,6 @@ export const getSpreadsheet = ({ date }: { date: string }) => {
     return SpreadsheetApp.openById(file.getId()); // open spreadsheet
   }
 
-  // sendToSlack(params, message);
+  sendToSlack(`新しく${date}のファイルを作成したワン🐶`);
   return createSpreadsheet({ date });
 };

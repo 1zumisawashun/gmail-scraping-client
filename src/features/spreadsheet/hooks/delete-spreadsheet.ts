@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  GMAIL_SCRAPING_CLIENT_FOLDER_ID,
-  COPY_NAME,
-} from '@/functions/constants';
+import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
 
-export const createSpreadsheet = ({ date }: { date: string }) => {
+export const deleteSpreadsheet = ({ filename }: { filename: string }) => {
   if (!GMAIL_SCRAPING_CLIENT_FOLDER_ID) {
     sendToSlack('エラーが発生したワン🐶');
     return undefined;
   }
+
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
-  const files = folder.getFilesByName(COPY_NAME);
+  // NOTE:削除ではなく別のフォルダに移す仕様に変わるかもしれない
+  const files = folder.getFilesByName('削除の練習');
+  files.next().setTrashed(true);
 
-  while (files.hasNext()) {
-    const file = files.next();
-    const copiedFile = file.makeCopy(date, folder);
-    return SpreadsheetApp.openById(copiedFile.getId());
-  }
-
-  sendToSlack('エラーが発生したワン🐶');
   return undefined;
 };

@@ -23,5 +23,7 @@ export function searchGmail() {
 
   // const strTerms = 'after:' + termStr + ' ' + searchCondition; //検索条件：termの期間に、searchConditionの条件に合致するメール
   const strTerms = `after:${termStr}`;
-  return GmailApp.search(strTerms, 0, 1000); // 条件にマッチしたスレッドを取得（一旦負荷を1000研磨で上げてみる）
+  // 条件にマッチしたスレッドを取得（一旦負荷を1000研磨で上げてみる）
+  // 500以上は設定できないぽい
+  return GmailApp.search(strTerms, 0, 100);
 }

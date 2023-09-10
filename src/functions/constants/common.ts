@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 export const GMAIL_SCRAPING_CLIENT_FOLDER_ID =
-  '111EECus3DJfd_-ptqVAX5I2xJitPpk7p';
+  PropertiesService.getScriptProperties().getProperty(
+    'GMAIL_SCRAPING_CLIENT_FOLDER_ID'
+  );
+
+export const SLACK_INCOMING_WEBHOOKS =
+  PropertiesService.getScriptProperties().getProperty(
+    'SLACK_INCOMING_WEBHOOKS'
+  );
 
 export const COPY_NAME = 'コピー（削除厳禁）';

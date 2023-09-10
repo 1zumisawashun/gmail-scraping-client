@@ -17,6 +17,7 @@ export { hello } from './example-module';
 export {
   formatDateFullYearMonthDateTime,
   formatDateFullYearMonthDate,
+  getOneWeekAgo,
 } from './format-date';
 export { logger } from './debug-log';
 export { sendToSlack } from './send-to-slack';
