@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
-import { createSpreadsheet } from './create-spreadsheet';
+export const sendToSlack = (message: string) => {
+  const url = PropertiesService.getScriptProperties().getProperty(
+    'SLACK_INCOMING_WEBHOOKS'
+  );
 
-export const getSpreadsheet = ({ date }: { date: string }) => {
-  const folderId = GMAIL_SCRAPING_CLIENT_FOLDER_ID;
+  if (!url) return;
 
-  const folder = DriveApp.getFolderById(folderId);
-  const files = folder.getFilesByName(date);
+  const jsonData = { text: message };
+  const payload = JSON.stringify(jsonData);
 
-  while (files.hasNext()) {
-    const file = files.next(); // get file
-    return SpreadsheetApp.openById(file.getId()); // open spreadsheet
-  }
-
-  // sendToSlack(params, message);
-  return createSpreadsheet({ date });
+  UrlFetchApp.fetch(url, {
+    method: 'post',
+    contentType: 'application/json',
+    payload,
+  });
 };

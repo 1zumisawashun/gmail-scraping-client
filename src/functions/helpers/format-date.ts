@@ -24,3 +24,28 @@ export const formatDateFullYearMonthDate = ({
 }: {
   date: GoogleAppsScript.Base.Date;
 }) => Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+
+export const getFormattedDate = (params: any) => {
+  const eventTs = params.event.event_ts;
+  const now = new Date(eventTs * 1000);
+
+  const hours = `0${now.getHours()}`.slice(-2);
+  const minutes = `0${now.getMinutes()}`.slice(-2);
+  const time = `${hours}:${minutes}`;
+
+  const dateFullYearMonth = Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy/MM');
+  const dateFullYearMonthDay = Utilities.formatDate(
+    now,
+    'Asia/Tokyo',
+    'yyyy/MM/dd'
+  );
+
+  const dateFullYearMonthDayTime = `${dateFullYearMonthDay} ${time}`;
+
+  return {
+    dateFullYearMonth,
+    dateFullYearMonthDay,
+    dateFullYearMonthDayTime,
+    time,
+  };
+};

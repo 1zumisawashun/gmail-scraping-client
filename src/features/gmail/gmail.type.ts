@@ -15,7 +15,8 @@
  */
 export type Gmail = {
   date: string;
-  datetime: string;
+  dateTime: string;
   email: string;
   subject: string;
+  body: string;
 };

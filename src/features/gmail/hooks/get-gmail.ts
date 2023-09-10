@@ -40,22 +40,28 @@ const getGmailEmail = ({ from }: { from: string }) => {
 export function getGmail() {
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
-  console.log(`●対象スレッド数: ${threads.length}`);
+  // console.log(`●対象スレッド数: ${threads.length}`);
 
   const params = [];
 
   for (const thread of messagesForThreads) {
-    console.log(`○スレッド内のメール数:${thread.length}`);
+    // console.log(`○スレッド内のメール数:${thread.length}`);
     for (const message of thread) {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });
-      const strDatetime = formatDateFullYearMonthDateTime({ date });
+      const strDateTime = formatDateFullYearMonthDateTime({ date });
       const from = message.getFrom();
       const email = getGmailEmail({ from });
       const subject = message.getSubject();
-      // const plainBody = message.getPlainBody();
+      const body = message.getPlainBody();
 
-      params.push({ date: strDate, datetime: strDatetime, email, subject });
+      params.push({
+        date: strDate,
+        dateTime: strDateTime,
+        email,
+        subject,
+        body,
+      });
     }
   }
 

@@ -18,13 +18,13 @@ import {
   COPY_NAME,
 } from '@/functions/constants';
 
-export const createSpreadsheet = ({ email }: { email: string }) => {
+export const createSpreadsheet = ({ date }: { date: string }) => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const files = folder.getFilesByName(COPY_NAME);
 
   while (files.hasNext()) {
     const file = files.next();
-    const copiedFile = file.makeCopy(email, folder);
+    const copiedFile = file.makeCopy(date, folder);
     return SpreadsheetApp.openById(copiedFile.getId());
   }
   return undefined;

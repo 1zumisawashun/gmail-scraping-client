@@ -19,3 +19,4 @@ export {
   formatDateFullYearMonthDate,
 } from './format-date';
 export { logger } from './debug-log';
+export { sendToSlack } from './send-to-slack';

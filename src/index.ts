@@ -17,17 +17,17 @@
 import { getGmail } from '@/features/gmail/hooks';
 import { getSpreadsheet } from '@/features/spreadsheet/hooks';
 import { getSheet, updateSheet } from '@/features/sheet/hooks';
-import { hello, logger } from '@/functions/helpers';
+import { hello, sendToSlack } from '@/functions/helpers';
 
 const main = () => {
   hello();
 
   const gmails = getGmail();
-  logger(gmails);
+  sendToSlack(`取得数は${gmails.length}件だったワン`);
 
   gmails.forEach(gmail => {
-    const { email, date } = gmail;
-    const spreadsheet = getSpreadsheet({ email });
+    const { date } = gmail;
+    const spreadsheet = getSpreadsheet({ date });
     const sheet = getSheet({ date, spreadsheet });
     updateSheet({ gmail, sheet });
   });

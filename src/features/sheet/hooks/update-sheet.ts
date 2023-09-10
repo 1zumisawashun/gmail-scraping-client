@@ -39,8 +39,8 @@ export const updateSheet = ({
   //   return;
   // }
 
-  const { datetime, email, subject } = gmail;
-  sheet.appendRow([datetime, email, subject]);
+  const { dateTime, email, subject, body } = gmail;
+  sheet.appendRow([dateTime, email, subject, body]);
 
   // const message = getRandomValue(syukkin_messages);
   // sendToSlack(params, `${message}（${dateFullYearMonthDayTime}）`);
