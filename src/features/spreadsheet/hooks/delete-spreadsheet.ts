@@ -13,22 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
+import {
+  GMAIL_SCRAPING_CLIENT_FOLDER_ID,
+  GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID,
+} from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
 
 export const deleteSpreadsheet = ({ filename }: { filename: string }) => {
-  if (!GMAIL_SCRAPING_CLIENT_FOLDER_ID) {
+  if (!GMAIL_SCRAPING_CLIENT_FOLDER_ID || !GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID) {
     sendToSlack('エラーが発生したワン🐶');
     return undefined;
   }
 
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
+  const db = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID);
 
-  // NOTE:削除ではなく別のフォルダに移す仕様に変わるかもしれない
   const files = folder.getFilesByName(filename);
+
   if (files.hasNext()) {
-    files.next().setTrashed(true);
-    sendToSlack(`古い${filename}のファイルを削除したワン🐶`);
+    const file = files.next();
+    file.moveTo(db);
+    sendToSlack(`古い${filename}のファイルをDBへ移動したワン🐶`);
   }
 
   return undefined;
