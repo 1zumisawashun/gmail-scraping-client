@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { angleBracketPattern, emailPattern } from './regex';
+export { angleBracketPattern, emailPattern } from './regular-expressions';
 export {
   GMAIL_SCRAPING_CLIENT_FOLDER_ID,
   SLACK_INCOMING_WEBHOOKS,
