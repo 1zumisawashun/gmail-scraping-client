@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 export function searchGmail() {
-  // 受信日時指定
   const date = new Date(); // 現在時刻を取得
   const unixTime = date.getTime(); // UNIX TIMEに変換
   const now = Math.floor(unixTime / 1000); // ミリ秒を秒に変換
-  const term = now - 60 * 60; // 現在時刻から1時間以内
+  const term = now - 60 * 15; // 現在時刻から15分前を取得する
   const termStr = term.toString(); // 検索期間を文字列に変換
 
   // const strTerms = 'after:' + termStr + ' ' + searchCondition; //検索条件：termの期間に、searchConditionの条件に合致するメール
   const strTerms = `after:${termStr}`;
-  // 条件にマッチしたスレッドを取得（一旦負荷を1000研磨で上げてみる）
-  // 500以上は設定できないぽい
+
+  // NOTE:500件以上は設定できないぽい
   return GmailApp.search(strTerms, 0, 100);
 }

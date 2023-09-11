@@ -17,7 +17,9 @@ import { searchGmail } from './search-gmail';
 import {
   formatDateFullYearMonthDateTime,
   formatDateFullYearMonthDate,
+  getToday,
 } from '@/functions/helpers';
+import { Gmail } from '@/features/gmail/gmail.type';
 import { angleBracketPattern, emailPattern } from '@/functions/constants';
 
 // FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
@@ -40,12 +42,10 @@ const getGmailEmail = ({ from }: { from: string }) => {
 export function getGmail() {
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
-  // console.log(`●対象スレッド数: ${threads.length}`);
 
-  const params = [];
+  const mails = [];
 
   for (const thread of messagesForThreads) {
-    // console.log(`○スレッド内のメール数:${thread.length}`);
     for (const message of thread) {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });
@@ -55,15 +55,20 @@ export function getGmail() {
       const subject = message.getSubject();
       const body = message.getPlainBody();
 
-      params.push({
-        date: strDate,
-        dateTime: strDateTime,
-        email,
-        subject,
-        body,
-      });
+      // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
+      const isTodayMail = strDate === getToday();
+      const params = isTodayMail
+        ? {
+            date: strDate,
+            dateTime: strDateTime,
+            email,
+            subject,
+            body,
+          }
+        : undefined;
+
+      mails.push(params);
     }
   }
-
-  return params;
+  return mails.filter(Boolean) as Gmail[];
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { sendToSlack } from '@/functions/helpers';
 
 export const createSheet = (
   date: string,
@@ -21,7 +22,7 @@ export const createSheet = (
   const copySheet = spreadsheet.getSheetByName('コピー（削除厳禁）');
 
   if (!copySheet) {
-    // sendToSlack(params, "createSheetに失敗したかに！");
+    sendToSlack('エラーが発生したワン🐶');
     return undefined;
   }
 

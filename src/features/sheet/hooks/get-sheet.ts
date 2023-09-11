@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { createSheet } from './create-sheet';
+import { sendToSlack } from '@/functions/helpers';
 
 export const getSheet = ({
   date,
@@ -23,7 +24,7 @@ export const getSheet = ({
   spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
 }) => {
   if (!spreadsheet) {
-    // sendToSlack(params, "spreadsheetが見つからなかったかに！");
+    sendToSlack('エラーが発生したワン🐶');
     return undefined;
   }
 

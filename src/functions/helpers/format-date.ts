@@ -35,6 +35,12 @@ export const getOneWeekAgo = () => {
   return oneWeekAgo;
 };
 
+export const getToday = () => {
+  const date = new Date();
+  const today = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+  return today;
+};
+
 // NOTE:kanisan-clientから引っ張ってきた。必要なければ削除する
 export const getFormattedDate = (params: any) => {
   const eventTs = params.event.event_ts;

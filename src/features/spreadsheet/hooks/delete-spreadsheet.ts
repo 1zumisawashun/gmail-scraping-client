@@ -23,9 +23,13 @@ export const deleteSpreadsheet = ({ filename }: { filename: string }) => {
   }
 
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
+
   // NOTE:削除ではなく別のフォルダに移す仕様に変わるかもしれない
-  const files = folder.getFilesByName('削除の練習');
-  files.next().setTrashed(true);
+  const files = folder.getFilesByName(filename);
+  if (files.hasNext()) {
+    files.next().setTrashed(true);
+    sendToSlack(`古い${filename}のファイルを削除したワン🐶`);
+  }
 
   return undefined;
 };
