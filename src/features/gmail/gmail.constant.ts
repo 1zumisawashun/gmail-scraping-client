@@ -13,19 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// 検索条件指定
-export const searchAndCondition = [
-  // 検索条件を配列で格納
-  '（検索条件その1）',
-  '（検索条件その2）',
-].join('\u0020'); // 半角スペースで連結
-
-// {Vue.js Nuxt.js React Next.js}でor条件になる
-export const searchOrCondition = [
-  // 検索条件を配列で格納
-  '（検索条件その1）',
-  '（検索条件その2）',
-].join('\u0020'); // 半角スペースで連結
 
 export const skills = [
   'HTML',

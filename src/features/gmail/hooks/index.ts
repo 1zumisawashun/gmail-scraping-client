@@ -15,3 +15,7 @@
  */
 export { getGmail } from './get-gmail';
 export { searchGmail } from './search-gmail';
+export {
+  searchCondition,
+  get15MinutesAgoSearchCondition,
+} from './get-search-condition';

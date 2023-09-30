@@ -44,10 +44,10 @@ export function getGmail() {
   const threads = searchGmail();
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
-  const mails = [];
+  const mails = [] as (Gmail | undefined)[];
 
-  for (const thread of messagesForThreads) {
-    for (const message of thread) {
+  messagesForThreads.forEach(thread => {
+    thread.forEach(message => {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });
       const strDateTime = formatDateFullYearMonthDateTime({ date });
@@ -56,9 +56,12 @@ export function getGmail() {
       const subject = message.getSubject();
       const body = message.getPlainBody();
       const attachments = message.getAttachments();
+
       // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件
       const hasPerson = subject.includes('要員');
       const hasAttachments = attachments.length !== 0;
+
+      message.markRead(); // 既読にする
 
       const category = () => {
         if (hasPerson) {
@@ -99,7 +102,8 @@ export function getGmail() {
         : undefined;
 
       mails.push(params);
-    }
-  }
+    });
+  });
+
   return mails.filter(Boolean) as Gmail[];
 }
