@@ -20,24 +20,8 @@ import {
   getToday,
 } from '@/functions/helpers';
 import { Gmail } from '@/features/gmail/gmail.type';
-import { angleBracketPattern, emailPattern } from '@/functions/constants';
 import { skills } from '@/features/gmail/gmail.constant';
-
-// FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
-const getGmailEmail = ({ from }: { from: string }) => {
-  const angleBracketMatches = from.match(angleBracketPattern);
-
-  if (angleBracketMatches) {
-    const emailMatches = angleBracketMatches[0].match(emailPattern);
-    if (emailMatches) {
-      return emailMatches[0];
-    }
-    console.log('メールアドレスが見つかりませんでした。');
-    return from;
-  }
-  console.log("'<...>' 形式のテキストが見つかりませんでした。");
-  return from;
-};
+import { getGmailEmail } from './get-gmail-email';
 
 /* eslint-disable */
 export function getGmail() {
