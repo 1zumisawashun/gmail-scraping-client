@@ -17,5 +17,6 @@ export { angleBracketPattern, emailPattern } from './regular-expressions';
 export {
   GMAIL_SCRAPING_CLIENT_FOLDER_ID,
   GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID,
+  GMAIL_SCRAPING_CLIENT_SUMMARY_FOLDER_ID,
   SLACK_INCOMING_WEBHOOKS,
 } from './script-properties';

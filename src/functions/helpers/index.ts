@@ -18,6 +18,8 @@ export {
   formatDateFullYearMonthDateTime,
   formatDateFullYearMonthDate,
   getOneWeekAgo,
+  getTwoDaysAgo,
+  getYesterday,
   getToday,
 } from './format-date';
 export { logger } from './debug-log';

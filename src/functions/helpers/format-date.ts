@@ -35,6 +35,26 @@ export const getOneWeekAgo = () => {
   return oneWeekAgo;
 };
 
+export const getTwoDaysAgo = () => {
+  const date = new Date();
+  const day = date.getDate();
+
+  date.setDate(day - 2);
+
+  const twoDaysAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+  return twoDaysAgo;
+};
+
+export const getYesterday = () => {
+  const date = new Date();
+  const day = date.getDate();
+
+  date.setDate(day - 1);
+
+  const twoDaysAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+  return twoDaysAgo;
+};
+
 export const getToday = () => {
   const date = new Date();
   const today = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');

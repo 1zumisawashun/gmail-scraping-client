@@ -21,6 +21,7 @@ import {
 } from '@/functions/helpers';
 import { Gmail } from '@/features/gmail/gmail.type';
 import { angleBracketPattern, emailPattern } from '@/functions/constants';
+import { skills } from '@/features/gmail/gmail.constant';
 
 // FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
 const getGmailEmail = ({ from }: { from: string }) => {
@@ -54,14 +55,44 @@ export function getGmail() {
       const email = getGmailEmail({ from });
       const subject = message.getSubject();
       const body = message.getPlainBody();
+      const attachments = message.getAttachments();
+      // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件
+      const hasPerson = subject.includes('要員');
+      const hasAttachments = attachments.length !== 0;
+
+      const category = () => {
+        if (hasPerson) {
+          return '要員情報';
+        }
+        if (hasAttachments) {
+          return '要員情報';
+        }
+        return '案件情報';
+      };
+
+      // NOTE:具体的なスキルを絞り込む
+      const _skills = skills
+        .map(skill => {
+          if (body.includes(skill)) {
+            return skill;
+          } else {
+            undefined;
+          }
+        })
+        .filter(Boolean) as string[];
+
+      const hasSkill = _skills.length !== 0;
 
       // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
       const isTodayMail = strDate === getToday();
+
       const params = isTodayMail
         ? {
             date: strDate,
             dateTime: strDateTime,
             email,
+            category: category(),
+            skill: hasSkill ? _skills.join('/') : 'なし',
             subject,
             body,
           }
