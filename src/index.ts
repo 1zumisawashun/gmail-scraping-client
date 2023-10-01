@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
+import { client } from '@/features/client';
+import { summary } from '@/features/summary';
+import { database } from '@/features/database';
 
-updateClientSheet();
-updateSummarySpreadsheet();
+client();
+summary();
+database();

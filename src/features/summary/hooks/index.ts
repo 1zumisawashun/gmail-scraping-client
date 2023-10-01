@@ -13,4 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { moveSpreadsheet } from './move-spreadsheet';
+export { getSummarySheet } from './get-summary-sheet';
+export { resetSummarySpreadsheet } from './reset-summary-sheet';

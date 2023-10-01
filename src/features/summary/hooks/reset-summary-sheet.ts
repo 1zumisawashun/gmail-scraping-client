@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const resetSummarySpreadsheet = ({
+export const resetSummarySpreadsheet = ({
   sheet,
-  sheetName,
+  name,
 }: {
   sheet: GoogleAppsScript.Spreadsheet.Sheet;
-  sheetName: string;
+  name: string;
 }) => {
-  sheet.setName(sheetName); // rename summary sheet
+  sheet.setName(name); // rename summary sheet
 
   const lastRow = sheet.getLastRow();
   const lastColumn = sheet.getLastColumn();
