@@ -15,7 +15,6 @@
  */
 import { angleBracketPattern, emailPattern } from '@/functions/constants';
 
-// FIXME:fromではなくemailを直接取得できるメソッドがあればそちらを使用する
 export const getGmailEmail = ({ from }: { from: string }) => {
   const angleBracketMatches = from.match(angleBracketPattern);
 

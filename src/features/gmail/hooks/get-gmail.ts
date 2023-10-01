@@ -49,24 +49,14 @@ export function getGmail() {
       message.markRead(); // 既読にする
 
       const category = () => {
-        if (hasPerson) {
-          return '要員情報';
-        }
-        if (hasAttachments) {
-          return '要員情報';
-        }
+        if (hasPerson) return '要員情報';
+        if (hasAttachments) return '要員情報';
         return '案件情報';
       };
 
       // NOTE:具体的なスキルを絞り込む
       const _skills = skills
-        .map(skill => {
-          if (body.includes(skill)) {
-            return skill;
-          } else {
-            undefined;
-          }
-        })
+        .map(skill => (body.includes(skill) ? skill : undefined))
         .filter(Boolean) as string[];
 
       const hasSkill = _skills.length !== 0;
