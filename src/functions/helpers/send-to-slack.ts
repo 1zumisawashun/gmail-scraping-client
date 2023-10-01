@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { SLACK_INCOMING_WEBHOOKS } from '@/functions/constants';
+
 export const sendToSlack = (message: string) => {
-  const url = PropertiesService.getScriptProperties().getProperty(
-    'SLACK_INCOMING_WEBHOOKS'
-  );
-
-  if (!url) return;
-
   const jsonData = { text: message };
   const payload = JSON.stringify(jsonData);
 
-  UrlFetchApp.fetch(url, {
+  UrlFetchApp.fetch(SLACK_INCOMING_WEBHOOKS, {
     method: 'post',
     contentType: 'application/json',
     payload,

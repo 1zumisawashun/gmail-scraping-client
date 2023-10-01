@@ -17,10 +17,6 @@ import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
 
 export const createSpreadsheet = ({ date }: { date: string }) => {
-  if (!GMAIL_SCRAPING_CLIENT_FOLDER_ID) {
-    sendToSlack('エラーが発生したワン🐶');
-    return undefined;
-  }
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const files = folder.getFilesByName('コピー（削除厳禁）');
 

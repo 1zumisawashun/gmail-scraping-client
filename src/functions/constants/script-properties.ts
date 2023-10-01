@@ -16,19 +16,19 @@
 export const GMAIL_SCRAPING_CLIENT_FOLDER_ID =
   PropertiesService.getScriptProperties().getProperty(
     'GMAIL_SCRAPING_CLIENT_FOLDER_ID'
-  );
+  ) as string;
 
 export const GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID =
   PropertiesService.getScriptProperties().getProperty(
     'GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID'
-  );
+  ) as string;
 
-export const GMAIL_SCRAPING_CLIENT_SUMMARY_FOLDER_ID =
+export const GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID =
   PropertiesService.getScriptProperties().getProperty(
-    'GMAIL_SCRAPING_CLIENT_SUMMARY_FOLDER_ID'
-  );
+    'GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID'
+  ) as string;
 
 export const SLACK_INCOMING_WEBHOOKS =
   PropertiesService.getScriptProperties().getProperty(
     'SLACK_INCOMING_WEBHOOKS'
-  );
+  ) as string;
