@@ -40,6 +40,7 @@ export function getGmail() {
       const subject = message.getSubject();
       const body = message.getPlainBody();
       const attachments = message.getAttachments();
+      const permalink = message.getThread().getPermalink();
 
       // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件
       const hasPerson = subject.includes('要員');
@@ -81,7 +82,7 @@ export function getGmail() {
             category: category(),
             skill: hasSkill ? _skills.join('/') : 'なし',
             subject,
-            body,
+            body: permalink,
           }
         : undefined;
 
