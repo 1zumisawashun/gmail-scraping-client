@@ -13,6 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSheet } from './create-sheet';
-export { getSheet } from './get-sheet';
-export { updateSheet } from './update-sheet';
+const resetSummarySpreadsheet = ({
+  sheet,
+  sheetName,
+}: {
+  sheet: GoogleAppsScript.Spreadsheet.Sheet;
+  sheetName: string;
+}) => {
+  sheet.setName(sheetName); // rename summary sheet
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+
+  const deleteRange = sheet.getRange(2, 1, lastRow, lastColumn);
+  deleteRange.clearContent();
+};

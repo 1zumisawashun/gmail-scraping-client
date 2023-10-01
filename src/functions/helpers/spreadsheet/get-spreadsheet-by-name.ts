@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
+import { createSpreadsheet } from './create-spreadsheet';
 import { sendToSlack } from '@/functions/helpers';
 
-export const createSpreadsheet = ({ date }: { date: string }) => {
+export const getSpreadsheet = ({ name }: { name: string }) => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
-  const files = folder.getFilesByName('コピー（削除厳禁）');
+  const files = folder.getFilesByName(name);
 
   while (files.hasNext()) {
-    const file = files.next();
-    const copiedFile = file.makeCopy(date, folder);
-    return SpreadsheetApp.openById(copiedFile.getId());
+    const file = files.next(); // get file
+    return SpreadsheetApp.openById(file.getId()); // open spreadsheet
   }
 
-  sendToSlack('エラーが発生したワン🐶');
-  return undefined;
+  sendToSlack(`新しく${name}のファイルを作成したワン🐶`);
+  return createSpreadsheet({ name });
 };

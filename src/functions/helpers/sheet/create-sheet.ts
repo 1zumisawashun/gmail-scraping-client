@@ -13,9 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { sendToSlack } from '@/functions/helpers';
 
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
+export const createSheet = (
+  name: string,
+  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet
+) => {
+  const copySheet = spreadsheet.getSheetByName('コピー（削除厳禁）');
 
-updateClientSheet();
-updateSummarySpreadsheet();
+  if (!copySheet) {
+    sendToSlack('エラーが発生したワン🐶');
+    return undefined;
+  }
+
+  const newSheet = copySheet.copyTo(spreadsheet);
+  newSheet.setName(name);
+  return newSheet;
+};

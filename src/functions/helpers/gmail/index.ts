@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
-
-updateClientSheet();
-updateSummarySpreadsheet();
+export { getGmailEmail } from './get-gmail-email';
+export {
+  searchCondition,
+  get15MinutesAgoSearchCondition,
+} from './get-gmail-search-condition';

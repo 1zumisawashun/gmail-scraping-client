@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { moveSpreadsheet } from './hooks';
+import { getOneWeekAgo } from '@/functions/helpers';
 
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
-
-updateClientSheet();
-updateSummarySpreadsheet();
+export const database = () => {
+  const oneWeekAgo = getOneWeekAgo();
+  moveSpreadsheet({ name: oneWeekAgo });
+};

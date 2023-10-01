@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export function searchGmail() {
-  // NOTE:今日の未読のメールを取得する
-  const searchCondition = `is:unread newer_than:1d `;
-  return GmailApp.search(searchCondition);
-}
+
+export { getGmail } from './get-gmail';
+export { updateClientSheet } from './update-client-sheet';
+export { updateSummarySheet } from './update-sumamry-sheet';

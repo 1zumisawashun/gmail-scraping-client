@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { sendToSlack } from '@/functions/helpers';
+import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
 
-export const createSheet = (
-  date: string,
-  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet
-) => {
-  const copySheet = spreadsheet.getSheetByName('コピー（削除厳禁）');
-
-  if (!copySheet) {
-    sendToSlack('エラーが発生したワン🐶');
-    return undefined;
-  }
-
-  const newSheet = copySheet.copyTo(spreadsheet);
-  newSheet.setName(date);
-  return newSheet;
+export const getSummarySheet = () => {
+  const summarySheet = SpreadsheetApp.openById(
+    GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID
+  );
+  const summaryActiveSheet = summarySheet.getActiveSheet();
+  return summaryActiveSheet;
 };

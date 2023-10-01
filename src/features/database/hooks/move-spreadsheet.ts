@@ -19,17 +19,15 @@ import {
 } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
 
-export const deleteSpreadsheet = ({ filename }: { filename: string }) => {
+export const moveSpreadsheet = ({ name }: { name: string }) => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const db = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID);
 
-  const files = folder.getFilesByName(filename);
+  const files = folder.getFilesByName(name);
 
   if (files.hasNext()) {
     const file = files.next();
     file.moveTo(db);
-    sendToSlack(`古い${filename}のファイルをDBへ移動したワン🐶`);
+    sendToSlack(`古い${name}のファイルをDBへ移動したワン🐶`);
   }
-
-  return undefined;
 };

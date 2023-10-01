@@ -13,6 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSpreadsheet } from './create-spreadsheet';
-export { getSpreadsheet } from './get-spreadsheet';
-export { deleteSpreadsheet } from './delete-spreadsheet';
+import { Gmail } from '@/features/client/client.type';
+import { getSpreadsheet } from '@/functions/helpers/spreadsheet';
+import { getSheet } from '@/functions/helpers/sheet';
+
+export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
+  const { date } = gmail;
+
+  const spreadsheet = getSpreadsheet({ name: date });
+  const sheet = getSheet({ name: date, spreadsheet });
+
+  if (!sheet) return;
+
+  const { dateTime, email, subject, category, skill, body } = gmail;
+  sheet.appendRow([dateTime, email, subject, category, skill, body]);
+};

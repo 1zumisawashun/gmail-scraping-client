@@ -13,3 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Gmail } from '@/features/client/client.type';
+import { getSummarySheet } from '@/features/summary/hooks/get-summary-sheet';
+
+export const updateSummarySheet = ({ gmail }: { gmail: Gmail }) => {
+  const { dateTime, email, subject, category, skill, body } = gmail;
+
+  const summarySheet = getSummarySheet();
+  summarySheet.appendRow([dateTime, email, subject, category, skill, body]);
+};

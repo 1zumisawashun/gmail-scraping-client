@@ -13,9 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {
+  updateClientSheet as _updateClientSheet,
+  updateSummarySheet,
+  getGmail,
+} from './hooks';
+import { sendToSlack } from '@/functions/helpers';
 
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
+export const updateClientSheet = () => {
+  const gmails = getGmail();
 
-updateClientSheet();
-updateSummarySpreadsheet();
+  gmails.forEach(gmail => {
+    _updateClientSheet({ gmail });
+    updateSummarySheet({ gmail });
+  });
+
+  sendToSlack(`取得数は${gmails.length}件だったワン🐶`);
+};

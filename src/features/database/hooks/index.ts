@@ -13,9 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { getGmail } from './get-gmail';
-export { searchGmail } from './search-gmail';
-export {
-  searchCondition,
-  get15MinutesAgoSearchCondition,
-} from './get-search-condition';
+export { moveSpreadsheet } from './move-spreadsheet';

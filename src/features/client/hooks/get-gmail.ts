@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { searchGmail } from './search-gmail';
+
 import {
   formatDateFullYearMonthDateTime,
   formatDateFullYearMonthDate,
   getToday,
 } from '@/functions/helpers';
-import { Gmail } from '@/features/gmail/gmail.type';
-import { skills } from '@/features/gmail/gmail.constant';
-import { getGmailEmail } from './get-gmail-email';
+import { Gmail } from '@/features/client/client.type';
+import { skills } from '@/features/client/client.constant';
+import { getGmailEmail } from '@/functions/helpers/gmail';
 
 /* eslint-disable */
 export function getGmail() {
-  const threads = searchGmail();
+  const threads = GmailApp.search(`is:unread newer_than:1d `);
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 
   const mails = [] as (Gmail | undefined)[];

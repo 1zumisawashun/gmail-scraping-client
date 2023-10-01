@@ -13,9 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+export const updateByValues = ({
+  sheet,
+  values,
+}: {
+  sheet: GoogleAppsScript.Spreadsheet.Sheet;
+  values: unknown[][];
+}) => {
+  const lastRow = sheet.getLastRow();
+  let updateRange: GoogleAppsScript.Spreadsheet.Range;
 
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
+  if (lastRow === 1) {
+    updateRange = sheet.getRange(2, 1, values.length, values[0].length);
+  } else {
+    updateRange = sheet.getRange(
+      lastRow + 1,
+      1,
+      values.length,
+      values[0].length
+    );
+  }
 
-updateClientSheet();
-updateSummarySpreadsheet();
+  updateRange.setValues(values);
+};

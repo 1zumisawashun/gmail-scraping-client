@@ -13,9 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { updateClientSheet } from '@/features/client';
-import { updateSummarySpreadsheet } from '@/features/summary';
-
-updateClientSheet();
-updateSummarySpreadsheet();
+export { createSheet } from './create-sheet';
+export { getSheet } from './get-sheet-by-name';

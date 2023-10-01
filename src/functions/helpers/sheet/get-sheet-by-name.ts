@@ -17,10 +17,10 @@ import { createSheet } from './create-sheet';
 import { sendToSlack } from '@/functions/helpers';
 
 export const getSheet = ({
-  date,
+  name,
   spreadsheet,
 }: {
-  date: string;
+  name: string;
   spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
 }) => {
   if (!spreadsheet) {
@@ -28,10 +28,10 @@ export const getSheet = ({
     return undefined;
   }
 
-  const sheet = spreadsheet.getSheetByName(date);
+  const sheet = spreadsheet.getSheetByName(name);
 
   if (!sheet) {
-    const newSheet = createSheet(date, spreadsheet);
+    const newSheet = createSheet(name, spreadsheet);
     return newSheet;
   }
 
