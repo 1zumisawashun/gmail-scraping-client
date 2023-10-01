@@ -19,8 +19,12 @@ import {
   getToday,
   getYesterday,
 } from '@/functions/helpers';
-import { getAllByName, updateByValues } from '@/functions/helpers/spreadsheet';
-import { getSummarySheet, resetSummarySpreadsheet } from './hooks';
+import {
+  getSummarySheet,
+  resetSummarySpreadsheet,
+  getAllByName,
+  updateByValues,
+} from './hooks';
 
 export const summary = () => {
   const twoDaysAgo = getTwoDaysAgo();

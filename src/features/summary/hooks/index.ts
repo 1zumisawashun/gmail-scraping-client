@@ -15,3 +15,5 @@
  */
 export { getSummarySheet } from './get-summary-sheet';
 export { resetSummarySpreadsheet } from './reset-summary-sheet';
+export { getAllByName } from './get-all-by-name';
+export { updateByValues } from './update-by-values';

@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getSpreadsheet } from './get-spreadsheet-by-name';
-import { getSheet } from '../sheet/get-sheet-by-name';
+import { getSpreadsheetByName } from '../../../functions/helpers/spreadsheet/get-spreadsheet-by-name';
+import { getSheetByName } from '../../../functions/helpers/sheet/get-sheet-by-name';
 /**
  * @description A2を起点にしてデータのある最終行・最終列のデータを取得する
  * @description getRange(行、列、行数、列数）
  * @see https://hajiritsu.com/gas-spreadsheet-getrange/
  */
 export const getAllByName = ({ name }: { name: string }) => {
-  const spreadsheet = getSpreadsheet({ name });
+  const spreadsheet = getSpreadsheetByName({ name });
   if (!spreadsheet) return undefined;
-  const sheet = getSheet({ spreadsheet, name });
+  const sheet = getSheetByName({ spreadsheet, name });
   if (!sheet) return undefined;
 
   const lastRow = sheet.getLastRow();

@@ -23,6 +23,7 @@ export const createSpreadsheet = ({ name }: { name: string }) => {
   while (files.hasNext()) {
     const file = files.next();
     const copiedFile = file.makeCopy(name, folder);
+    sendToSlack(`新しく${name}のファイルを作成したワン🐶`);
     return SpreadsheetApp.openById(copiedFile.getId());
   }
 

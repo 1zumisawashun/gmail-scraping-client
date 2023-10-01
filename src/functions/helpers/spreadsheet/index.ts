@@ -13,7 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { getAllByName } from './get-all-by-name';
-export { updateByValues } from './update-by-values';
 export { createSpreadsheet } from './create-spreadsheet';
-export { getSpreadsheet } from './get-spreadsheet-by-name';
+export { getSpreadsheetByName } from './get-spreadsheet-by-name';

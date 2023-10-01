@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 export { createSheet } from './create-sheet';
-export { getSheet } from './get-sheet-by-name';
+export { getSheetByName } from './get-sheet-by-name';

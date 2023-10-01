@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { createSheet } from './create-sheet';
+
 import { sendToSlack } from '@/functions/helpers';
 
-export const getSheet = ({
+export const getSheetByName = ({
   name,
   spreadsheet,
 }: {
@@ -30,10 +30,5 @@ export const getSheet = ({
 
   const sheet = spreadsheet.getSheetByName(name);
 
-  if (!sheet) {
-    const newSheet = createSheet(name, spreadsheet);
-    return newSheet;
-  }
-
-  return sheet;
+  return sheet ?? undefined;
 };

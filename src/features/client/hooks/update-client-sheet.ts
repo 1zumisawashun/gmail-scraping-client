@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 import { Gmail } from '@/features/client/client.type';
-import { getSpreadsheet } from '@/functions/helpers/spreadsheet';
-import { getSheet } from '@/functions/helpers/sheet';
+import {
+  getSpreadsheetByName,
+  createSpreadsheet,
+} from '@/functions/helpers/spreadsheet';
+import { getSheetByName, createSheet } from '@/functions/helpers/sheet';
 
 export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
   const { date } = gmail;
 
-  const spreadsheet = getSpreadsheet({ name: date });
-  const sheet = getSheet({ name: date, spreadsheet });
+  let spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
+
+  spreadsheet = getSpreadsheetByName({ name: date });
+  if (!spreadsheet) {
+    spreadsheet = createSpreadsheet({ name: date });
+  }
+
+  let sheet: GoogleAppsScript.Spreadsheet.Sheet | undefined;
+
+  sheet = getSheetByName({ name: date, spreadsheet });
+  if (!sheet) {
+    sheet = createSheet({ name: date, spreadsheet });
+  }
 
   if (!sheet) return;
 

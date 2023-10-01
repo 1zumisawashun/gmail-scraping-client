@@ -15,10 +15,18 @@
  */
 import { sendToSlack } from '@/functions/helpers';
 
-export const createSheet = (
-  name: string,
-  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet
-) => {
+export const createSheet = ({
+  name,
+  spreadsheet,
+}: {
+  name: string;
+  spreadsheet?: GoogleAppsScript.Spreadsheet.Spreadsheet;
+}) => {
+  if (!spreadsheet) {
+    sendToSlack('エラーが発生したワン🐶');
+    return undefined;
+  }
+
   const copySheet = spreadsheet.getSheetByName('コピー（削除厳禁）');
 
   if (!copySheet) {
