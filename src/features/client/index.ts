@@ -24,5 +24,7 @@ export const client = () => {
     updateSummarySheet({ gmail });
   });
 
-  sendToSlack(`取得数は${gmails.length}件だったワン🐶`);
+  if (gmails.length !== 0) {
+    sendToSlack(`取得数は${gmails.length}件だったワン🐶`);
+  }
 };

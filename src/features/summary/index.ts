@@ -38,7 +38,9 @@ export const summary = () => {
     name: `${twoDaysAgo}〜${today}`,
   });
 
-  const twoDaysAgoValues = getAllByName({ name: twoDaysAgo });
+  // FIXME:一旦期待値のデータを出してみる
+  // const twoDaysAgoValues = getAllByName({ name: twoDaysAgo });
+  const twoDaysAgoValues: any[][] | undefined = undefined;
   const yesterdayValues = getAllByName({ name: yesterday });
 
   if (twoDaysAgoValues) {
