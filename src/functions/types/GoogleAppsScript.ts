@@ -15,3 +15,5 @@
  */
 export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
 export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
+
+export type Range = GoogleAppsScript.Spreadsheet.Range;

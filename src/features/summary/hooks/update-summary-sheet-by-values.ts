@@ -13,15 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export const updateByValues = ({
+import { Sheet, Range } from '@/functions/types/GoogleAppsScript';
+
+export const updateSummarySheetByValues = ({
   sheet,
   values,
 }: {
-  sheet: GoogleAppsScript.Spreadsheet.Sheet;
+  sheet: Sheet;
   values: unknown[][];
 }) => {
   const lastRow = sheet.getLastRow();
-  let updateRange: GoogleAppsScript.Spreadsheet.Range;
+  let updateRange: Range;
 
   if (lastRow === 1) {
     updateRange = sheet.getRange(2, 1, values.length, values[0].length);

@@ -20,18 +20,19 @@ import {
 } from '@/functions/helpers/spreadsheet';
 import { getSheetByName, createSheetByName } from '@/functions/helpers/sheet';
 import { sendToSlack } from '@/functions/helpers';
+import { Spreadsheet, Sheet } from '@/functions/types/GoogleAppsScript';
 
 export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
   const { date } = gmail;
 
-  let spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
+  let spreadsheet: Spreadsheet | undefined;
 
   spreadsheet = getSpreadsheetByName({ name: date });
   if (!spreadsheet) {
     spreadsheet = createSpreadsheetByName({ name: date });
   }
 
-  let sheet: GoogleAppsScript.Spreadsheet.Sheet | undefined;
+  let sheet: Sheet | undefined;
 
   sheet = getSheetByName({ name: date, spreadsheet });
   if (!sheet) {

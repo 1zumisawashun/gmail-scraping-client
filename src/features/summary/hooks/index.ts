@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 export { getSummarySheet } from './get-summary-sheet';
-export { resetSummarySpreadsheet } from './reset-summary-sheet';
-export { getAllByName } from './get-all-by-name';
-export { updateByValues } from './update-by-values';
+export { resetSummarySheet } from './reset-summary-sheet';
+export { getSheetValuesByName } from './get-sheet-values-by-name';
+export { updateSummarySheetByValues } from './update-summary-sheet-by-values';

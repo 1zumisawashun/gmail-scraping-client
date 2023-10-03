@@ -80,5 +80,7 @@ export function getGmail() {
     });
   });
 
+  // FIXME:ダブっている要素はここで排除する（groupBy）
+
   return mails.filter(Boolean) as Gmail[];
 }

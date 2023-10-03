@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export const resetSummarySpreadsheet = ({
+import { Sheet } from '@/functions/types/GoogleAppsScript';
+
+export const resetSummarySheet = ({
   sheet,
   name,
 }: {
-  sheet: GoogleAppsScript.Spreadsheet.Sheet;
+  sheet: Sheet;
   name: string;
 }) => {
   sheet.setName(name); // rename summary sheet
