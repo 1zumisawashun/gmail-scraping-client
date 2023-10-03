@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  sendToSlack,
-  getTwoDaysAgo,
-  getToday,
-  getYesterday,
-} from '@/functions/helpers';
+import { getTwoDaysAgo, getToday, getYesterday } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 import {
   getSummarySheet,
   resetSummarySheet,
@@ -38,21 +34,24 @@ export const summary = () => {
     name: `${twoDaysAgo}〜${today}`,
   });
 
-  const twoDaysAgoValues = getSheetValuesByName({ name: twoDaysAgo });
-  const yesterdayValues = getSheetValuesByName({ name: yesterday });
+  const twoDaysAgoSheetValues = getSheetValuesByName({ name: twoDaysAgo });
+  const yesterdaySheetValues = getSheetValuesByName({ name: yesterday });
 
-  if (twoDaysAgoValues) {
+  if (twoDaysAgoSheetValues) {
     updateSummarySheetByValues({
       sheet: summarySheet,
-      values: twoDaysAgoValues,
-    });
-  }
-  if (yesterdayValues) {
-    updateSummarySheetByValues({
-      sheet: summarySheet,
-      values: yesterdayValues,
+      values: twoDaysAgoSheetValues,
     });
   }
 
-  sendToSlack('サマリーを更新したワン🐶');
+  if (yesterdaySheetValues) {
+    updateSummarySheetByValues({
+      sheet: summarySheet,
+      values: yesterdaySheetValues,
+    });
+  }
+
+  if (twoDaysAgoSheetValues && yesterdaySheetValues) {
+    sendToSlack(`新しく${twoDaysAgo}〜${today}のファイルを作成したワン🐶`);
+  }
 };

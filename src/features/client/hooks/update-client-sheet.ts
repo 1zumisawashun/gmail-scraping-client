@@ -19,7 +19,7 @@ import {
   createSpreadsheetByName,
 } from '@/functions/helpers/spreadsheet';
 import { getSheetByName, createSheetByName } from '@/functions/helpers/sheet';
-import { sendToSlack } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 import { Spreadsheet, Sheet } from '@/functions/types/GoogleAppsScript';
 
 export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
@@ -46,4 +46,6 @@ export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
 
   const { dateTime, email, subject, category, skill, body } = gmail;
   sheet.appendRow([dateTime, email, subject, category, skill, body]);
+
+  sendToSlack('clientを更新したワン🐶');
 };

@@ -24,6 +24,7 @@ import { getSheetByName } from '@/functions/helpers/sheet';
 export const getSheetValuesByName = ({ name }: { name: string }) => {
   const spreadsheet = getSpreadsheetByName({ name });
   if (!spreadsheet) return undefined;
+
   const sheet = getSheetByName({ spreadsheet, name });
   if (!sheet) return undefined;
 

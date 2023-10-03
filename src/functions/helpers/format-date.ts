@@ -13,50 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export const formatDateFullYearMonthDateTime = ({
-  date,
-}: {
-  date: GoogleAppsScript.Base.Date;
-}) => Utilities.formatDate(date, 'JST', 'yyyy/MM/dd HH:mm:ss');
+import { GasDate } from '@/functions/types/GoogleAppsScript';
 
-export const formatDateFullYearMonthDate = ({
-  date,
-}: {
-  date: GoogleAppsScript.Base.Date;
-}) => Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+export const formatDateFullYearMonthDateTime = ({ date }: { date: GasDate }) =>
+  Utilities.formatDate(date, 'JST', 'yyyy/MM/dd HH:mm:ss');
 
-export const getOneWeekAgo = () => {
-  const date = new Date();
+export const formatDateFullYearMonthDate = ({ date }: { date: GasDate }) =>
+  Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
+
+export const addDays = ({ date, num }: { date: Date; num: number }) => {
   const day = date.getDate();
-
-  date.setDate(day - 7);
-
-  const oneWeekAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
-  return oneWeekAgo;
+  date.setDate(day + num);
+  return Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
 };
 
-export const getTwoDaysAgo = () => {
-  const date = new Date();
-  const day = date.getDate();
+export const getOneWeekAgo = () => addDays({ date: new Date(), num: -7 });
 
-  date.setDate(day - 2);
+export const getTwoDaysAgo = () => addDays({ date: new Date(), num: -2 });
 
-  const twoDaysAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
-  return twoDaysAgo;
-};
+export const getYesterday = () => addDays({ date: new Date(), num: -1 });
 
-export const getYesterday = () => {
-  const date = new Date();
-  const day = date.getDate();
-
-  date.setDate(day - 1);
-
-  const twoDaysAgo = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
-  return twoDaysAgo;
-};
-
-export const getToday = () => {
-  const date = new Date();
-  const today = Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
-  return today;
-};
+export const getToday = () => addDays({ date: new Date(), num: 0 });

@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export { getGmail } from './get-gmail';
+export { getClientGmail } from './get-client-gmail';
 export { updateClientSheet } from './update-client-sheet';
 export { updateSummarySheet } from './update-sumamry-sheet';

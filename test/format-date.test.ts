@@ -13,7 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
-export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
-export type Range = GoogleAppsScript.Spreadsheet.Range;
-export type GasDate = GoogleAppsScript.Base.Date;
+import { addDays } from '@/functions/helpers';
+
+describe('format-date', () => {
+  const date = new Date('2020-8-20');
+
+  it('Returns a one weeks ago string', () => {
+    expect(addDays({ date, num: -7 })).toBe('2020/8/13');
+  });
+  it('Returns a today string', () => {
+    expect(addDays({ date, num: 0 })).toBe('2020/8/20');
+  });
+  it('Returns a two days ago string', () => {
+    expect(addDays({ date, num: -2 })).toBe('2020/8/18');
+  });
+  it('Returns a yesterday string', () => {
+    expect(addDays({ date, num: -1 })).toBe('2020/8/19');
+  });
+});

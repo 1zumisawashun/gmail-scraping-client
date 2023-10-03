@@ -21,6 +21,6 @@ export {
   getTwoDaysAgo,
   getYesterday,
   getToday,
+  addDays,
 } from './format-date';
-export { logger } from './debug-log';
-export { sendToSlack } from './send-to-slack';
+export { logger } from './logger';

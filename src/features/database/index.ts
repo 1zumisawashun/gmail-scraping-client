@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getOneWeekAgo, sendToSlack } from '@/functions/helpers';
+import { getOneWeekAgo } from '@/functions/helpers';
 import {
   GMAIL_SCRAPING_CLIENT_FOLDER_ID,
   GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID,
 } from '@/functions/constants';
+import { sendToSlack } from '@/functions/helpers/slack';
 
 export const database = () => {
-  const oneWeekAgo = getOneWeekAgo();
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const db = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID);
 
+  const oneWeekAgo = getOneWeekAgo();
   const files = folder.getFilesByName(oneWeekAgo);
 
   if (files.hasNext()) {
     const file = files.next();
     file.moveTo(db);
-    sendToSlack(`古い${oneWeekAgo}のファイルをDBへ移動したワン🐶`);
+    sendToSlack(`古い${oneWeekAgo}のファイルをdatabaseへ移動したワン🐶`);
   }
 };

@@ -24,7 +24,7 @@ import { skills } from '@/features/client/client.constant';
 import { getGmailEmail } from '@/functions/helpers/gmail';
 
 /* eslint-disable */
-export function getGmail() {
+export function getClientGmail() {
   const threads = GmailApp.search(`is:unread newer_than:1d `);
   const messagesForThreads = GmailApp.getMessagesForThreads(threads);
 

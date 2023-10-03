@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { hello } from '../src/functions/helpers/example-module';
+import { hello } from '@/functions/helpers';
 
 describe('example-module', () => {
   describe('hello', () => {

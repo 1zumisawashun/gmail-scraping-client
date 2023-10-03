@@ -17,11 +17,10 @@ import { Gmail } from '@/features/client/client.type';
 import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
 import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
 import { getSheetByName } from '@/functions/helpers/sheet';
-import { getTwoDaysAgo, getToday, sendToSlack } from '@/functions/helpers';
+import { getTwoDaysAgo, getToday } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 
 export const updateSummarySheet = ({ gmail }: { gmail: Gmail }) => {
-  const { dateTime, email, subject, category, skill, body } = gmail;
-
   const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
 
   const twoDaysAgo = getTwoDaysAgo();
@@ -36,5 +35,8 @@ export const updateSummarySheet = ({ gmail }: { gmail: Gmail }) => {
     return;
   }
 
+  const { dateTime, email, subject, category, skill, body } = gmail;
   sheet.appendRow([dateTime, email, category, skill, subject, body]);
+
+  sendToSlack('summaryを更新したワン🐶');
 };

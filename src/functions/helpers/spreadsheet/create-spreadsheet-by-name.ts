@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
-import { sendToSlack } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
 import { Spreadsheet } from '@/functions/types/GoogleAppsScript';
 

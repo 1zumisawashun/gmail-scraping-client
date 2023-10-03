@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { sendToSlack } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 import { getSheetByName } from '@/functions/helpers/sheet';
 import { Sheet, Spreadsheet } from '@/functions/types/GoogleAppsScript';
 

@@ -13,7 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
-export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
-export type Range = GoogleAppsScript.Spreadsheet.Range;
-export type GasDate = GoogleAppsScript.Base.Date;
+export { sendToSlack } from './send-to-slack';

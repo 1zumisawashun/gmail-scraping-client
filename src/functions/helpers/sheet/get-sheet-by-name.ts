@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { sendToSlack } from '@/functions/helpers';
+import { sendToSlack } from '@/functions/helpers/slack';
 import { Sheet, Spreadsheet } from '@/functions/types/GoogleAppsScript';
 
 export const getSheetByName = ({
