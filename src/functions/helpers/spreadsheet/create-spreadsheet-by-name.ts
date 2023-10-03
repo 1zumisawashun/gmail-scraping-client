@@ -15,16 +15,25 @@
  */
 import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers';
+import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
+import { Spreadsheet } from '@/functions/types/GoogleAppsScript';
 
-export const createSpreadsheet = ({ name }: { name: string }) => {
+export const createSpreadsheetByName = ({
+  name,
+}: {
+  name: string;
+}): Spreadsheet | undefined => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const files = folder.getFilesByName('コピー（削除厳禁）');
 
   while (files.hasNext()) {
     const file = files.next();
     const copiedFile = file.makeCopy(name, folder);
+    const id = copiedFile.getId();
+
     sendToSlack(`新しく${name}のファイルを作成したワン🐶`);
-    return SpreadsheetApp.openById(copiedFile.getId());
+
+    return getSpreadsheetById({ id });
   }
 
   sendToSlack('エラーが発生したワン🐶');

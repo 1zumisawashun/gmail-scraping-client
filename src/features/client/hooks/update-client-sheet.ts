@@ -16,9 +16,10 @@
 import { Gmail } from '@/features/client/client.type';
 import {
   getSpreadsheetByName,
-  createSpreadsheet,
+  createSpreadsheetByName,
 } from '@/functions/helpers/spreadsheet';
-import { getSheetByName, createSheet } from '@/functions/helpers/sheet';
+import { getSheetByName, createSheetByName } from '@/functions/helpers/sheet';
+import { sendToSlack } from '@/functions/helpers';
 
 export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
   const { date } = gmail;
@@ -27,17 +28,20 @@ export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
 
   spreadsheet = getSpreadsheetByName({ name: date });
   if (!spreadsheet) {
-    spreadsheet = createSpreadsheet({ name: date });
+    spreadsheet = createSpreadsheetByName({ name: date });
   }
 
   let sheet: GoogleAppsScript.Spreadsheet.Sheet | undefined;
 
   sheet = getSheetByName({ name: date, spreadsheet });
   if (!sheet) {
-    sheet = createSheet({ name: date, spreadsheet });
+    sheet = createSheetByName({ name: date, spreadsheet });
   }
 
-  if (!sheet) return;
+  if (!sheet) {
+    sendToSlack('エラーが発生したワン🐶');
+    return;
+  }
 
   const { dateTime, email, subject, category, skill, body } = gmail;
   sheet.appendRow([dateTime, email, subject, category, skill, body]);

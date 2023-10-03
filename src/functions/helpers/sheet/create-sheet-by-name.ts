@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 import { sendToSlack } from '@/functions/helpers';
+import { getSheetByName } from '@/functions/helpers/sheet';
+import { Sheet, Spreadsheet } from '@/functions/types/GoogleAppsScript';
 
-export const createSheet = ({
+export const createSheetByName = ({
   name,
   spreadsheet,
 }: {
   name: string;
-  spreadsheet?: GoogleAppsScript.Spreadsheet.Spreadsheet;
-}) => {
+  spreadsheet?: Spreadsheet;
+}): Sheet | undefined => {
   if (!spreadsheet) {
     sendToSlack('エラーが発生したワン🐶');
     return undefined;
   }
 
-  const copySheet = spreadsheet.getSheetByName('コピー（削除厳禁）');
+  const copySheet = getSheetByName({ name: 'コピー（削除厳禁）', spreadsheet });
 
   if (!copySheet) {
     sendToSlack('エラーが発生したワン🐶');
@@ -36,5 +38,6 @@ export const createSheet = ({
 
   const newSheet = copySheet.copyTo(spreadsheet);
   newSheet.setName(name);
+
   return newSheet;
 };

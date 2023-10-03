@@ -13,5 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSpreadsheet } from './create-spreadsheet';
+export { createSpreadsheetByName } from './create-spreadsheet-by-name';
 export { getSpreadsheetByName } from './get-spreadsheet-by-name';
+export { getSpreadsheetById } from './get-spreadsheet-by-id';

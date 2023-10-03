@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 import { GMAIL_SCRAPING_CLIENT_FOLDER_ID } from '@/functions/constants';
+import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
+import { Spreadsheet } from '@/functions/types/GoogleAppsScript';
 
-export const getSpreadsheetByName = ({ name }: { name: string }) => {
+// NOTE:getSpreadsheetByNameはないのでカスタムする必要がある
+export const getSpreadsheetByName = ({
+  name,
+}: {
+  name: string;
+}): Spreadsheet | undefined => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
   const files = folder.getFilesByName(name);
 
   while (files.hasNext()) {
-    const file = files.next(); // get file
-    return SpreadsheetApp.openById(file.getId()); // open spreadsheet
+    const file = files.next();
+    const id = file.getId();
+    return getSpreadsheetById({ id });
   }
 
   return undefined;

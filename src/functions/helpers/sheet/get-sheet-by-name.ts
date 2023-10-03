@@ -15,14 +15,15 @@
  */
 
 import { sendToSlack } from '@/functions/helpers';
+import { Sheet, Spreadsheet } from '@/functions/types/GoogleAppsScript';
 
 export const getSheetByName = ({
   name,
   spreadsheet,
 }: {
   name: string;
-  spreadsheet: GoogleAppsScript.Spreadsheet.Spreadsheet | undefined;
-}) => {
+  spreadsheet: Spreadsheet | undefined;
+}): Sheet | undefined => {
   if (!spreadsheet) {
     sendToSlack('エラーが発生したワン🐶');
     return undefined;

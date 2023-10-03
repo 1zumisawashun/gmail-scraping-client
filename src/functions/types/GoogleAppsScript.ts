@@ -13,5 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSheetByName } from './create-sheet-by-name';
-export { getSheetByName } from './get-sheet-by-name';
+export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
+export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;

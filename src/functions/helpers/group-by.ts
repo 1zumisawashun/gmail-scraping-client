@@ -13,5 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSheetByName } from './create-sheet-by-name';
-export { getSheetByName } from './get-sheet-by-name';
+// export const groupBy = <T, K extends keyof T>({
+//   array,
+//   key,
+// }: {
+//   array: T[];
+//   key: K;
+// }) => {
+//   const results = array.reduce((acc, obj) => {
+//     const keyValue = obj[key];
+//     if (!acc[keyValue]) {
+//       acc[keyValue] = [];
+//     }
+//     acc[keyValue].push(obj);
+//     return acc;
+//   }, {});
+
+//   return Object.entries(results).map(([_, value]) => {
+//     return value;
+//   });
+// };

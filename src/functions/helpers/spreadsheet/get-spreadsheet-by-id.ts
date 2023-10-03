@@ -13,5 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { createSheetByName } from './create-sheet-by-name';
-export { getSheetByName } from './get-sheet-by-name';
+import { Spreadsheet } from '@/functions/types/GoogleAppsScript';
+
+export const getSpreadsheetById = ({ id }: { id: string }): Spreadsheet => {
+  const spreadsheet = SpreadsheetApp.openById(id);
+  return spreadsheet;
+};

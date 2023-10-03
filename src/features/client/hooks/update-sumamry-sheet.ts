@@ -14,11 +14,27 @@
  * limitations under the License.
  */
 import { Gmail } from '@/features/client/client.type';
-import { getSummarySheet } from '@/features/summary/hooks/get-summary-sheet';
+import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
+import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
+import { getSheetByName } from '@/functions/helpers/sheet';
+import { getTwoDaysAgo, getToday, sendToSlack } from '@/functions/helpers';
 
 export const updateSummarySheet = ({ gmail }: { gmail: Gmail }) => {
   const { dateTime, email, subject, category, skill, body } = gmail;
 
-  const summarySheet = getSummarySheet();
-  summarySheet.appendRow([dateTime, email, subject, category, skill, body]);
+  const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
+
+  const twoDaysAgo = getTwoDaysAgo();
+  const today = getToday();
+  const name = `${twoDaysAgo}〜${today}`;
+
+  const spreadsheet = getSpreadsheetById({ id });
+  const sheet = getSheetByName({ name, spreadsheet });
+
+  if (!sheet) {
+    sendToSlack('エラーが発生したワン🐶');
+    return;
+  }
+
+  sheet.appendRow([dateTime, email, category, skill, subject, body]);
 };
