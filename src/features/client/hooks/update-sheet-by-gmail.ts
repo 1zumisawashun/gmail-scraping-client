@@ -13,7 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { getOldSummarySheet } from './get-old-summary-sheet';
-export { resetSummarySheet } from './reset-summary-sheet';
-export { getSheetValuesByName } from './get-sheet-values-by-name';
-export { updateSummarySheetByValues } from './update-summary-sheet-by-values';
+import { Gmail } from '@/features/client/client.type';
+import { Sheet } from '@/functions/types/GoogleAppsScript';
+
+export const updateSheetByGmail = ({
+  gmail,
+  sheet,
+}: {
+  gmail: Gmail;
+  sheet: Sheet;
+}) => {
+  const { dateTime, email, subject, category, skill, body } = gmail;
+  sheet.appendRow([dateTime, email, subject, category, skill, body]);
+};

@@ -13,39 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Gmail } from '@/features/client/client.type';
 import {
   getSpreadsheetByName,
   createSpreadsheetByName,
 } from '@/functions/helpers/spreadsheet';
 import { getSheetByName, createSheetByName } from '@/functions/helpers/sheet';
-import { sendToSlack } from '@/functions/helpers/slack';
 import { Spreadsheet, Sheet } from '@/functions/types/GoogleAppsScript';
+import { getToday } from '@/functions/helpers';
 
-export const updateClientSheet = ({ gmail }: { gmail: Gmail }) => {
-  const { date } = gmail;
+export const getClientSheet = () => {
+  const today = getToday();
 
   let spreadsheet: Spreadsheet | undefined;
 
-  spreadsheet = getSpreadsheetByName({ name: date });
+  spreadsheet = getSpreadsheetByName({ name: today });
   if (!spreadsheet) {
-    spreadsheet = createSpreadsheetByName({ name: date });
+    spreadsheet = createSpreadsheetByName({ name: today });
   }
 
   let sheet: Sheet | undefined;
 
-  sheet = getSheetByName({ name: date, spreadsheet });
+  sheet = getSheetByName({ name: today, spreadsheet });
   if (!sheet) {
-    sheet = createSheetByName({ name: date, spreadsheet });
+    sheet = createSheetByName({ name: today, spreadsheet });
   }
 
-  if (!sheet) {
-    sendToSlack('エラーが発生したワン🐶');
-    return;
-  }
-
-  const { dateTime, email, subject, category, skill, body } = gmail;
-  sheet.appendRow([dateTime, email, subject, category, skill, body]);
-
-  sendToSlack('clientを更新したワン🐶');
+  return sheet;
 };

@@ -16,7 +16,7 @@
 import { getTwoDaysAgo, getToday, getYesterday } from '@/functions/helpers';
 import { sendToSlack } from '@/functions/helpers/slack';
 import {
-  getSummarySheet,
+  getOldSummarySheet,
   resetSummarySheet,
   getSheetValuesByName,
   updateSummarySheetByValues,
@@ -27,7 +27,12 @@ export const summary = () => {
   const yesterday = getYesterday();
   const today = getToday();
 
-  const summarySheet = getSummarySheet();
+  const summarySheet = getOldSummarySheet();
+
+  if (!summarySheet) {
+    sendToSlack(`old-summary-sheetが見つからなかったワン🐶`);
+    return;
+  }
 
   resetSummarySheet({
     sheet: summarySheet,

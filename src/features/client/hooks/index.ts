@@ -15,5 +15,6 @@
  */
 
 export { getClientGmail } from './get-client-gmail';
-export { updateClientSheet } from './update-client-sheet';
-export { updateSummarySheet } from './update-sumamry-sheet';
+export { getClientSheet } from './get-client-sheet';
+export { getSummarySheet } from './get-summary-sheet';
+export { updateSheetByGmail } from './update-sheet-by-gmail';

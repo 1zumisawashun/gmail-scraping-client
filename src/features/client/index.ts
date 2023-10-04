@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { updateClientSheet, updateSummarySheet, getClientGmail } from './hooks';
+import {
+  getClientGmail,
+  getClientSheet,
+  getSummarySheet,
+  updateSheetByGmail,
+} from './hooks';
 import { sendToSlack } from '@/functions/helpers/slack';
 
 export const client = () => {
@@ -23,8 +28,23 @@ export const client = () => {
 
   sendToSlack(`取得数は${gmails.length}件だったワン🐶`);
 
-  gmails.forEach(gmail => {
-    updateClientSheet({ gmail });
-    updateSummarySheet({ gmail });
-  });
+  const clientSheet = getClientSheet();
+
+  if (clientSheet) {
+    gmails.forEach(gmail => {
+      updateSheetByGmail({ gmail, sheet: clientSheet });
+    });
+  } else {
+    sendToSlack('client-sheetが見つからなかったワン🐶');
+  }
+
+  const summarySheet = getSummarySheet();
+
+  if (summarySheet) {
+    gmails.forEach(gmail => {
+      updateSheetByGmail({ gmail, sheet: summarySheet });
+    });
+  } else {
+    sendToSlack('summary-sheetが見つからなかったワン🐶');
+  }
 };

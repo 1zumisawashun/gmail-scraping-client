@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
+import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
+import { getSheetByName } from '@/functions/helpers/sheet';
+import { getTwoDaysAgo, getToday } from '@/functions/helpers';
 
 export const getSummarySheet = () => {
-  const summarySheet = SpreadsheetApp.openById(
-    GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID
-  );
-  const summaryActiveSheet = summarySheet.getActiveSheet();
-  return summaryActiveSheet;
+  const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
+
+  const twoDaysAgo = getTwoDaysAgo();
+  const today = getToday();
+  const name = `${twoDaysAgo}〜${today}`;
+
+  const spreadsheet = getSpreadsheetById({ id });
+  const sheet = getSheetByName({ name, spreadsheet });
+
+  return sheet;
 };

@@ -13,30 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Gmail } from '@/features/client/client.type';
 import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
 import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
-import { getSheetByName } from '@/functions/helpers/sheet';
-import { getTwoDaysAgo, getToday } from '@/functions/helpers';
-import { sendToSlack } from '@/functions/helpers/slack';
 
-export const updateSummarySheet = ({ gmail }: { gmail: Gmail }) => {
+export const getOldSummarySheet = () => {
   const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
-
-  const twoDaysAgo = getTwoDaysAgo();
-  const today = getToday();
-  const name = `${twoDaysAgo}〜${today}`;
-
   const spreadsheet = getSpreadsheetById({ id });
-  const sheet = getSheetByName({ name, spreadsheet });
-
-  if (!sheet) {
-    sendToSlack('エラーが発生したワン🐶');
-    return;
-  }
-
-  const { dateTime, email, subject, category, skill, body } = gmail;
-  sheet.appendRow([dateTime, email, category, skill, subject, body]);
-
-  sendToSlack('summaryを更新したワン🐶');
+  const sheets = spreadsheet.getSheets(); // すべてのシートを配列で取得
+  return sheets[0]; // 一番左のシートを返す
 };
