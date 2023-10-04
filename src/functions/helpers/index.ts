@@ -17,6 +17,7 @@ export { hello } from './example-module';
 export {
   formatDateFullYearMonthDateTime,
   formatDateFullYearMonthDate,
+  formatDateTime,
   getOneWeekAgo,
   getTwoDaysAgo,
   getYesterday,

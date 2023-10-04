@@ -21,6 +21,9 @@ export const formatDateFullYearMonthDateTime = ({ date }: { date: GasDate }) =>
 export const formatDateFullYearMonthDate = ({ date }: { date: GasDate }) =>
   Utilities.formatDate(date, 'JST', 'yyyy/MM/dd');
 
+export const formatDateTime = ({ date }: { date: GasDate }) =>
+  Utilities.formatDate(date, 'JST', 'HH:mm:ss');
+
 export const addDays = ({ date, num }: { date: Date; num: number }) => {
   const day = date.getDate();
   date.setDate(day + num);

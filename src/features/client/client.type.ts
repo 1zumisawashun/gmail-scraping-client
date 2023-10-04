@@ -15,10 +15,10 @@
  */
 export type Gmail = {
   date: string;
-  dateTime: string;
+  time: string;
   email: string;
+  subject: string;
   category: string;
   skill: string;
-  subject: string;
-  body: string;
+  permalink: string;
 };

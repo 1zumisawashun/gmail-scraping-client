@@ -15,7 +15,7 @@
  */
 
 import {
-  formatDateFullYearMonthDateTime,
+  formatDateTime,
   formatDateFullYearMonthDate,
   getToday,
 } from '@/functions/helpers';
@@ -34,7 +34,7 @@ export function getClientGmail() {
     thread.forEach(message => {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });
-      const strDateTime = formatDateFullYearMonthDateTime({ date });
+      const strTime = formatDateTime({ date });
       const from = message.getFrom();
       const email = getGmailEmail({ from });
       const subject = message.getSubject();
@@ -67,12 +67,12 @@ export function getClientGmail() {
       const params = isTodayMail
         ? {
             date: strDate,
-            dateTime: strDateTime,
+            time: strTime,
             email,
             category: category(),
             skill: hasSkill ? _skills.join('/') : 'なし',
             subject,
-            body: permalink,
+            permalink,
           }
         : undefined;
 
