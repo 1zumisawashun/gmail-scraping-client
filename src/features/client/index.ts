@@ -16,7 +16,7 @@
 import {
   getClientGmail,
   getClientSheet,
-  getSummarySheet,
+  getIntegrationSheet,
   updateSheetByGmail,
 } from './hooks';
 import { sendToSlack } from '@/functions/helpers/slack';
@@ -38,13 +38,13 @@ export const client = () => {
     sendToSlack('client-sheetが見つからなかったワン🐶');
   }
 
-  const summarySheet = getSummarySheet();
+  const integrationSheet = getIntegrationSheet();
 
-  if (summarySheet) {
+  if (integrationSheet) {
     gmails.forEach(gmail => {
-      updateSheetByGmail({ gmail, sheet: summarySheet });
+      updateSheetByGmail({ gmail, sheet: integrationSheet });
     });
   } else {
-    sendToSlack('summary-sheetが見つからなかったワン🐶');
+    sendToSlack('integration-sheetが見つからなかったワン🐶');
   }
 };

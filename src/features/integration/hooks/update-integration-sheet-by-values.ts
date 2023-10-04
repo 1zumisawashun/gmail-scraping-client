@@ -15,7 +15,7 @@
  */
 import { Sheet, Range } from '@/functions/types/GoogleAppsScript';
 
-export const updateSummarySheetByValues = ({
+export const updateIntegrationSheetByValues = ({
   sheet,
   values,
 }: {

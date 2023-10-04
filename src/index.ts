@@ -15,9 +15,9 @@
  */
 
 import { client } from '@/features/client';
-import { summary } from '@/features/summary';
+import { integration } from '@/features/integration';
 import { database } from '@/features/database';
 
 client();
-summary();
+integration();
 database();

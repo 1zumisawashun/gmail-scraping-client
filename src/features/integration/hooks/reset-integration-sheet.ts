@@ -13,7 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { getOldSummarySheet } from './get-old-summary-sheet';
-export { resetSummarySheet } from './reset-summary-sheet';
-export { getSheetValuesByName } from './get-sheet-values-by-name';
-export { updateSummarySheetByValues } from './update-summary-sheet-by-values';
+import { Sheet } from '@/functions/types/GoogleAppsScript';
+
+export const resetIntegrationSheet = ({
+  sheet,
+  name,
+}: {
+  sheet: Sheet;
+  name: string;
+}) => {
+  sheet.setName(name); // rename integration sheet
+
+  const lastRow = sheet.getLastRow();
+  const lastColumn = sheet.getLastColumn();
+
+  const deleteRange = sheet.getRange(2, 1, lastRow, lastColumn);
+  deleteRange.clearContent();
+};

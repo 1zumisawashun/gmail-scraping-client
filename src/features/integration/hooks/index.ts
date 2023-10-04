@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
-import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
-
-export const getOldSummarySheet = () => {
-  const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
-  const spreadsheet = getSpreadsheetById({ id });
-  const sheets = spreadsheet.getSheets(); // すべてのシートを配列で取得
-  return sheets[0]; // 一番左のシートを返す
-};
+export { getOldIntegrationSheet } from './get-old-integration-sheet';
+export { resetIntegrationSheet } from './reset-integration-sheet';
+export { getSheetValuesByName } from './get-sheet-values-by-name';
+export { updateIntegrationSheetByValues } from './update-integration-sheet-by-values';

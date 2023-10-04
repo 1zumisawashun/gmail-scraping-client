@@ -16,13 +16,13 @@
 import { getOneWeekAgo } from '@/functions/helpers';
 import {
   GMAIL_SCRAPING_CLIENT_FOLDER_ID,
-  GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID,
+  GMAIL_SCRAPING_CLIENT_DATABASE_FOLDER_ID,
 } from '@/functions/constants';
 import { sendToSlack } from '@/functions/helpers/slack';
 
 export const database = () => {
   const folder = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_FOLDER_ID);
-  const db = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_DB_FOLDER_ID);
+  const db = DriveApp.getFolderById(GMAIL_SCRAPING_CLIENT_DATABASE_FOLDER_ID);
 
   const oneWeekAgo = getOneWeekAgo();
   const files = folder.getFilesByName(oneWeekAgo);

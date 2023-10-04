@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID } from '@/functions/constants';
+import { GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID } from '@/functions/constants';
 import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
 import { getSheetByName } from '@/functions/helpers/sheet';
 import { getTwoDaysAgo, getToday } from '@/functions/helpers';
 
-export const getSummarySheet = () => {
-  const id = GMAIL_SCRAPING_CLIENT_SUMMARY_SPREADSHEET_ID;
+export const getIntegrationSheet = () => {
+  const id = GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID;
 
   const twoDaysAgo = getTwoDaysAgo();
   const today = getToday();

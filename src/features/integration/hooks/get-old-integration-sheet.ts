@@ -13,20 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Sheet } from '@/functions/types/GoogleAppsScript';
+import { GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID } from '@/functions/constants';
+import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
 
-export const resetSummarySheet = ({
-  sheet,
-  name,
-}: {
-  sheet: Sheet;
-  name: string;
-}) => {
-  sheet.setName(name); // rename summary sheet
-
-  const lastRow = sheet.getLastRow();
-  const lastColumn = sheet.getLastColumn();
-
-  const deleteRange = sheet.getRange(2, 1, lastRow, lastColumn);
-  deleteRange.clearContent();
+export const getOldIntegrationSheet = () => {
+  const id = GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID;
+  const spreadsheet = getSpreadsheetById({ id });
+  const sheets = spreadsheet.getSheets(); // すべてのシートを配列で取得
+  return sheets[0]; // 一番左のシートを返す
 };

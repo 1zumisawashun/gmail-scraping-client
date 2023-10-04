@@ -16,26 +16,26 @@
 import { getTwoDaysAgo, getToday, getYesterday } from '@/functions/helpers';
 import { sendToSlack } from '@/functions/helpers/slack';
 import {
-  getOldSummarySheet,
-  resetSummarySheet,
+  getOldIntegrationSheet,
+  resetIntegrationSheet,
   getSheetValuesByName,
-  updateSummarySheetByValues,
+  updateIntegrationSheetByValues,
 } from './hooks';
 
-export const summary = () => {
+export const integration = () => {
   const twoDaysAgo = getTwoDaysAgo();
   const yesterday = getYesterday();
   const today = getToday();
 
-  const summarySheet = getOldSummarySheet();
+  const integrationSheet = getOldIntegrationSheet();
 
-  if (!summarySheet) {
-    sendToSlack(`old-summary-sheetが見つからなかったワン🐶`);
+  if (!integrationSheet) {
+    sendToSlack(`old-integration-sheetが見つからなかったワン🐶`);
     return;
   }
 
-  resetSummarySheet({
-    sheet: summarySheet,
+  resetIntegrationSheet({
+    sheet: integrationSheet,
     name: `${twoDaysAgo}〜${today}`,
   });
 
@@ -43,15 +43,15 @@ export const summary = () => {
   const yesterdaySheetValues = getSheetValuesByName({ name: yesterday });
 
   if (twoDaysAgoSheetValues) {
-    updateSummarySheetByValues({
-      sheet: summarySheet,
+    updateIntegrationSheetByValues({
+      sheet: integrationSheet,
       values: twoDaysAgoSheetValues,
     });
   }
 
   if (yesterdaySheetValues) {
-    updateSummarySheetByValues({
-      sheet: summarySheet,
+    updateIntegrationSheetByValues({
+      sheet: integrationSheet,
       values: yesterdaySheetValues,
     });
   }
