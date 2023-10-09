@@ -17,3 +17,13 @@ export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
 export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
 export type Range = GoogleAppsScript.Spreadsheet.Range;
 export type GasDate = GoogleAppsScript.Base.Date;
+
+export type BatchUpdateSpreadsheetRequest =
+  GoogleAppsScript.Sheets.Schema.BatchUpdateSpreadsheetRequest;
+
+export type Request = GoogleAppsScript.Sheets.Schema.Request;
+
+export type SetBasicFilterRequest =
+  GoogleAppsScript.Sheets.Schema.SetBasicFilterRequest;
+
+export type BasicFilter = GoogleAppsScript.Sheets.Schema.BasicFilter;

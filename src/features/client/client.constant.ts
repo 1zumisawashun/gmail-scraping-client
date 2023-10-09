@@ -129,3 +129,10 @@ export const skills = [
   'CMake',
   'Rust',
 ];
+
+export const workStyles = [
+  'リモート',
+  'フルリモート',
+  'テレワーク',
+  'フルテレワーク',
+];

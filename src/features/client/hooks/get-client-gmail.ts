@@ -20,8 +20,8 @@ import {
   getToday,
 } from '@/functions/helpers';
 import { Gmail } from '@/features/client/client.type';
-import { skills } from '@/features/client/client.constant';
 import { getGmailEmail } from '@/functions/helpers/gmail';
+import { formatClientGmailBody } from '@/features/client/hooks';
 
 /* eslint-disable */
 export function getClientGmail() {
@@ -35,12 +35,21 @@ export function getClientGmail() {
       const date = message.getDate();
       const strDate = formatDateFullYearMonthDate({ date });
       const strTime = formatDateTime({ date });
+
       const from = message.getFrom();
       const email = getGmailEmail({ from });
+      if ('noreply-apps-scripts-notifications@google.com'.includes(email))
+        return undefined;
+
       const subject = message.getSubject();
-      const body = message.getPlainBody();
       const attachments = message.getAttachments();
       const permalink = message.getThread().getPermalink();
+
+      // NOTE:期間に部分一致する一行を取得する
+      // let message = body.match(/：([\s\S]*)/);
+      const body = message.getPlainBody();
+      const { period, workStyle, foreigner, owner, skill } =
+        formatClientGmailBody({ body });
 
       // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件
       const hasPerson = subject.includes('要員');
@@ -49,17 +58,10 @@ export function getClientGmail() {
       message.markRead(); // 既読にする
 
       const category = () => {
-        if (hasPerson) return '要員情報';
-        if (hasAttachments) return '要員情報';
-        return '案件情報';
+        if (hasPerson) return '×';
+        if (hasAttachments) return '×';
+        return '⚪︎';
       };
-
-      // NOTE:具体的なスキルを絞り込む
-      const _skills = skills
-        .map(skill => (body.includes(skill) ? skill : undefined))
-        .filter(Boolean) as string[];
-
-      const hasSkill = _skills.length !== 0;
 
       // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
       const isTodayMail = strDate === getToday();
@@ -69,10 +71,14 @@ export function getClientGmail() {
             date: strDate,
             time: strTime,
             email,
-            category: category(),
-            skill: hasSkill ? _skills.join('/') : 'なし',
             subject,
             permalink,
+            category: category(),
+            skill,
+            period,
+            workStyle,
+            foreigner,
+            owner,
           }
         : undefined;
 

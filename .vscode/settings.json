@@ -12,5 +12,6 @@
   "typescript.referencesCodeLens.enabled": true,
   "editor.stickyScroll.enabled": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "json.schemaDownload.enable": true
+  "json.schemaDownload.enable": true,
+  "docthis.includeDescriptionTag": true
 }
