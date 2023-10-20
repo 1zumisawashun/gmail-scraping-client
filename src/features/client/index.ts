@@ -38,13 +38,14 @@ export const client = () => {
     sendToSlack('client-sheetが見つからなかったワン🐶');
   }
 
-  const integrationSheet = getIntegrationSheet();
+  // NOTE:一旦統合ファイルに関しては後回しにする
+  // const integrationSheet = getIntegrationSheet();
 
-  if (integrationSheet) {
-    gmails.forEach(gmail => {
-      updateSheetByGmail({ gmail, sheet: integrationSheet });
-    });
-  } else {
-    sendToSlack('integration-sheetが見つからなかったワン🐶');
-  }
+  // if (integrationSheet) {
+  //   gmails.forEach(gmail => {
+  //     updateSheetByGmail({ gmail, sheet: integrationSheet });
+  //   });
+  // } else {
+  //   sendToSlack('integration-sheetが見つからなかったワン🐶');
+  // }
 };

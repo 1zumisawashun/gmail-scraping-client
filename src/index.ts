@@ -15,9 +15,11 @@
  */
 
 import { client } from '@/features/client';
-// import { integration } from '@/features/integration';
 import { database } from '@/features/database';
+import { skillFilter } from '@/features/filter';
+// import { integration } from '@/features/integration';
 
 client();
-// integration();
 database();
+skillFilter();
+// integration();
