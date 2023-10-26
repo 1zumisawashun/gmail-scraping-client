@@ -23,6 +23,30 @@ export const updateSheetByGmail = ({
   gmail: Gmail;
   sheet: Sheet;
 }) => {
-  const { date, time, email, subject, category, skill, permalink } = gmail;
-  sheet.appendRow([date, time, email, subject, category, skill, permalink]);
+  const {
+    date,
+    time,
+    email,
+    subject,
+    permalink,
+    category,
+    skill,
+    period,
+    workStyle,
+    foreigner,
+    owner,
+  } = gmail;
+  sheet.appendRow([
+    date,
+    time,
+    email,
+    subject,
+    permalink,
+    category,
+    skill,
+    period,
+    workStyle,
+    foreigner,
+    owner,
+  ]);
 };

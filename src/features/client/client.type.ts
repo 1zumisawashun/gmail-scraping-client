@@ -18,7 +18,11 @@ export type Gmail = {
   time: string;
   email: string;
   subject: string;
+  permalink: string;
   category: string;
   skill: string;
-  permalink: string;
+  period: string;
+  workStyle: string;
+  foreigner: string;
+  owner: string;
 };
