@@ -16,7 +16,7 @@
 
 import { client } from '@/features/client';
 import { database } from '@/features/database';
-import { skillFilter } from '@/features/filter';
+import { skillFilter } from '@/features/basic-filter';
 // import { integration } from '@/features/integration';
 
 client();

@@ -33,30 +33,27 @@ export const skillFilter = () => {
     .getValues()
     .flat();
 
-  // NOTE:hiddenValuesの逆にする
-
-  const filterSet: any = {};
-
-  filterSet.range = {
-    sheetId: spreadsheet.getSheetId(),
-  };
-
-  filterSet.criteria = {};
-
-  const columnIndex = 0;
-
-  filterSet.criteria[columnIndex] = {
-    hiddenValues: hiddenIds,
-  };
-
-  const request = {
+  /**
+   * @description basicFilterの型定義
+   * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets?hl=ja#BasicFilter
+   */
+  const setBasicFilterRequest = {
     setBasicFilter: {
-      filter: filterSet,
+      filter: {
+        range: {
+          sheetId: spreadsheet.getSheetId(),
+        },
+        criteria: {
+          0: {
+            hiddenValues: hiddenIds,
+          },
+        },
+      },
     },
   };
 
   const batchUpdateParams = {
-    requests: [request],
+    requests: [setBasicFilterRequest],
   };
 
   if (!Sheets.Spreadsheets) {
