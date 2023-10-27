@@ -39,13 +39,13 @@ export const client = () => {
   }
 
   // NOTE:一旦統合ファイルに関しては後回しにする
-  // const integrationSheet = getIntegrationSheet();
+  const integrationSheet = getIntegrationSheet();
 
-  // if (integrationSheet) {
-  //   gmails.forEach(gmail => {
-  //     updateSheetByGmail({ gmail, sheet: integrationSheet });
-  //   });
-  // } else {
-  //   sendToSlack('integration-sheetが見つからなかったワン🐶');
-  // }
+  if (integrationSheet) {
+    gmails.forEach(gmail => {
+      updateSheetByGmail({ gmail, sheet: integrationSheet });
+    });
+  } else {
+    sendToSlack('integration-sheetが見つからなかったワン🐶');
+  }
 };
