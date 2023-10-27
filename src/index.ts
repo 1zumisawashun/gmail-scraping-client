@@ -16,7 +16,6 @@
 
 import { client as clientFunc } from '@/features/client';
 import { database as databaseFunc } from '@/features/database';
-import { skillFilter as skillFilterFunc } from '@/features/basic-filter';
 import { integration as integrationFunc } from '@/features/integration';
 
 function client() {
@@ -25,10 +24,6 @@ function client() {
 function database() {
   databaseFunc();
 }
-function skillFilter() {
-  skillFilterFunc();
-}
-function onEdit(e: any) {
-  console.log(e);
+function integration() {
   integrationFunc();
 }
