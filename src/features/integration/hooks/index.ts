@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { getOldIntegrationSheet } from './get-old-integration-sheet';
+export { getIntegrationSheet } from './get-integration-sheet';
 export { resetIntegrationSheet } from './reset-integration-sheet';
 export { getSheetValuesByName } from './get-sheet-values-by-name';
 export { updateIntegrationSheetByValues } from './update-integration-sheet-by-values';

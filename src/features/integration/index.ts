@@ -16,7 +16,7 @@
 import { getTwoDaysAgo, getToday, getYesterday } from '@/functions/helpers';
 import { sendToSlack } from '@/functions/helpers/slack';
 import {
-  getOldIntegrationSheet,
+  getIntegrationSheet,
   resetIntegrationSheet,
   getSheetValuesByName,
   updateIntegrationSheetByValues,
@@ -27,7 +27,7 @@ export const integration = () => {
   const yesterday = getYesterday();
   const today = getToday();
 
-  const integrationSheet = getOldIntegrationSheet();
+  const integrationSheet = getIntegrationSheet();
 
   if (!integrationSheet) {
     sendToSlack(`old-integration-sheetが見つからなかったワン🐶`);
@@ -56,7 +56,5 @@ export const integration = () => {
     });
   }
 
-  if (twoDaysAgoSheetValues && yesterdaySheetValues) {
-    sendToSlack(`新しく${twoDaysAgo}〜${today}のファイルを作成したワン🐶`);
-  }
+  sendToSlack(`新しく${twoDaysAgo}〜${today}のファイルを作成したワン🐶`);
 };

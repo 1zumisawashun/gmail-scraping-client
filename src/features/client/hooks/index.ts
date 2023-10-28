@@ -16,6 +16,5 @@
 
 export { getClientGmail } from './get-client-gmail';
 export { getClientSheet } from './get-client-sheet';
-export { getIntegrationSheet } from './get-integration-sheet';
 export { updateSheetByGmail } from './update-sheet-by-gmail';
 export { formatClientGmailBody } from './format-client-gmail-body';

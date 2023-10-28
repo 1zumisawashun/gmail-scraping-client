@@ -13,12 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  getClientGmail,
-  getClientSheet,
-  getIntegrationSheet,
-  updateSheetByGmail,
-} from './hooks';
+import { getClientGmail, getClientSheet, updateSheetByGmail } from './hooks';
+import { getIntegrationSheet } from '@/features/integration/hooks';
 import { sendToSlack } from '@/functions/helpers/slack';
 
 export const client = () => {
@@ -38,7 +34,6 @@ export const client = () => {
     sendToSlack('client-sheetが見つからなかったワン🐶');
   }
 
-  // NOTE:一旦統合ファイルに関しては後回しにする
   const integrationSheet = getIntegrationSheet();
 
   if (integrationSheet) {

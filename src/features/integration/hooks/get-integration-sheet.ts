@@ -15,18 +15,10 @@
  */
 import { GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID } from '@/functions/constants';
 import { getSpreadsheetById } from '@/functions/helpers/spreadsheet';
-import { getSheetByName } from '@/functions/helpers/sheet';
-import { getTwoDaysAgo, getToday } from '@/functions/helpers';
 
 export const getIntegrationSheet = () => {
   const id = GMAIL_SCRAPING_CLIENT_INTEGRATION_SPREADSHEET_ID;
-
-  const twoDaysAgo = getTwoDaysAgo();
-  const today = getToday();
-  const name = `${twoDaysAgo}〜${today}`;
-
   const spreadsheet = getSpreadsheetById({ id });
-  const sheet = getSheetByName({ name, spreadsheet });
-
-  return sheet;
+  const sheets = spreadsheet.getSheets(); // すべてのシートを配列で取得
+  return sheets[0]; // 一番左のシートを返す
 };
