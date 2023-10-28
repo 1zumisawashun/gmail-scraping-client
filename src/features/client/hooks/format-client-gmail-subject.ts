@@ -15,7 +15,11 @@
  */
 import { GmailMessage } from '@/functions/types/GoogleAppsScript';
 
-export const formatClientGmailCategory = ({
+/**
+ * @description メールタイトルの「要員情報」や「要員のご提案」や「〇〇人材」やエクセル・pdfの添付があるメールは要員情報・それ以外は案件情報として分類する
+ * @description メール「本文」の要員情報のバリデーションは別途実施する
+ */
+export const formatClientGmailSubject = ({
   message,
 }: {
   message: GmailMessage;
@@ -23,11 +27,12 @@ export const formatClientGmailCategory = ({
   const subject = message.getSubject();
   const attachments = message.getAttachments();
 
-  // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件として分ける
-  const hasPerson = subject.includes('要員');
+  const hasYouin = subject.includes('要員');
+  const hasZinzai = subject.includes('人材');
   const hasAttachments = attachments.length !== 0;
 
-  if (hasPerson) return '要員情報';
+  if (hasYouin) return '要員情報';
+  if (hasZinzai) return '要員情報';
   if (hasAttachments) return '要員情報';
   return '案件情報';
 };

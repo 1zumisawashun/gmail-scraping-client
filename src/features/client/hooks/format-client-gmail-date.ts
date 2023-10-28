@@ -28,7 +28,7 @@ export const formatClientGmailDate = ({
   const date = formatDateFullYearMonthDate({ date: message.getDate() });
   const time = formatDateTime({ date: message.getDate() });
 
-  // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
+  // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾くために作成
   const isTodayMail = date === getToday();
 
   return { date, time, isTodayMail };

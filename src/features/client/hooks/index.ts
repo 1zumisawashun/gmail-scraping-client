@@ -18,5 +18,5 @@ export { getClientGmail } from './get-client-gmail';
 export { getClientSheet } from './get-client-sheet';
 export { updateSheetByGmail } from './update-sheet-by-gmail';
 export { formatClientGmailBody } from './format-client-gmail-body';
-export { formatClientGmailCategory } from './format-client-gmail-category';
+export { formatClientGmailSubject } from './format-client-gmail-subject';
 export { formatClientGmailDate } from './format-client-gmail-date';

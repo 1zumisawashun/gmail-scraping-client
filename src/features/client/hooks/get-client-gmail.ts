@@ -18,7 +18,7 @@ import { Gmail } from '@/features/client/client.type';
 import { getGmailEmail } from '@/functions/helpers/gmail';
 import {
   formatClientGmailBody,
-  formatClientGmailCategory,
+  formatClientGmailSubject,
   formatClientGmailDate,
 } from '@/features/client/hooks';
 
@@ -39,7 +39,7 @@ export function getClientGmail() {
       const { date, time, isTodayMail } = formatClientGmailDate({ message });
       const { period, workStyle, foreigner, owner, skill } =
         formatClientGmailBody({ message });
-      const category = formatClientGmailCategory({ message });
+      const category = formatClientGmailSubject({ message });
 
       message.markRead(); // NOTE:既読にする
 

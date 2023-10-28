@@ -15,31 +15,51 @@
  */
 import { skills, workStyles } from '@/features/client/client.constant';
 import { GmailMessage } from '@/functions/types/GoogleAppsScript';
+
 /**
  * @description 「期間」に部分一致する場合、該当箇所から改行するまでの一文を取得する
- * @description startDateとendDateで区切れればなお良い？chatGPT使った方が良いかも。
  */
-const getPeriod = (body: string) => {
-  // TODO:期間の抽出精度を高める
-  return body.includes('期間') ? body.split('期間')[1].split('\n')[0] : '×';
+const getPeriod = ({ body }: { body: string }) => {
+  const targets = ['【期間】:', '【期間】：', '期間：', '期間：'];
+
+  let output = '';
+
+  targets.forEach(target => {
+    if (body.includes(target)) {
+      const el = body.split(target)[1].split('\n')[0];
+      output = el;
+    }
+  });
+
+  return output ?? '-';
 };
 
-const getWorkStyle = (body: string) => {
-  return workStyles.includes(body) ? '⚪︎' : '×';
+const getWorkStyle = ({ body }: { body: string }): string => {
+  // 地方在住者不可
+  return workStyles.includes(body) ? 'リモート可能' : 'リモート不可';
 };
 
-const getSkills = (body: string) => {
-  return skills
+const getSkills = ({ body }: { body: string }): string => {
+  const bodySkills = skills
     .map(skill => (body.includes(skill) ? skill : undefined))
     .filter(Boolean) as string[];
+
+  const hasBodySkill = bodySkills.length !== 0;
+  return hasBodySkill ? bodySkills.join('/') : '-';
 };
 
-const getForeigner = (body: string) => {
-  return '×';
+const getForeigner = ({ body }: { body: string }): string => {
+  // 外国人可否
+  if ('外国人不可'.includes(body)) {
+    return '外国人不可';
+  }
+  return '-';
 };
 
-const getOwner = (body: string) => {
-  return '×';
+const getOwner = ({ body }: { body: string }): string => {
+  // 個人事業主
+  // 商流：貴社まで（個人事業主も可）
+  return '-';
 };
 
 export const formatClientGmailBody = ({
@@ -49,15 +69,11 @@ export const formatClientGmailBody = ({
 }) => {
   const body = message.getPlainBody();
 
-  const period = getPeriod(body);
-  const workStyle = getWorkStyle(body);
-  const foreigner = getForeigner(body);
-  const owner = getOwner(body);
-
-  // NOTE:具体的なスキルを絞り込む
-  const bodySkills = getSkills(body);
-  const hasBodySkill = bodySkills.length !== 0;
-  const skill = hasBodySkill ? bodySkills.join('/') : '×';
+  const period = getPeriod({ body });
+  const workStyle = getWorkStyle({ body });
+  const foreigner = getForeigner({ body });
+  const owner = getOwner({ body });
+  const skill = getSkills({ body });
 
   return { period, workStyle, foreigner, owner, skill };
 };
