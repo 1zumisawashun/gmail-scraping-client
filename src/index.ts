@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-import { client as clientFunc } from '@/features/client';
-import { database as databaseFunc } from '@/features/database';
-import { integration as integrationFunc } from '@/features/integration';
+import { client as _client } from '@/features/client';
+import { database as _database } from '@/features/database';
+import { integration as _integration } from '@/features/integration';
 
 function client() {
-  clientFunc();
+  _client();
 }
 function database() {
-  databaseFunc();
+  _database();
 }
 function integration() {
-  integrationFunc();
+  _integration();
 }
