@@ -13,17 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * =============================================
+ * Spreadsheet
+ * =============================================
+ */
 export type Spreadsheet = GoogleAppsScript.Spreadsheet.Spreadsheet;
 export type Sheet = GoogleAppsScript.Spreadsheet.Sheet;
 export type Range = GoogleAppsScript.Spreadsheet.Range;
+
+/**
+ * =============================================
+ * Base
+ * =============================================
+ */
 export type GasDate = GoogleAppsScript.Base.Date;
 
+/**
+ * =============================================
+ * Sheet
+ * =============================================
+ */
 export type BatchUpdateSpreadsheetRequest =
   GoogleAppsScript.Sheets.Schema.BatchUpdateSpreadsheetRequest;
-
 export type Request = GoogleAppsScript.Sheets.Schema.Request;
-
 export type SetBasicFilterRequest =
   GoogleAppsScript.Sheets.Schema.SetBasicFilterRequest;
-
 export type BasicFilter = GoogleAppsScript.Sheets.Schema.BasicFilter;
+
+/**
+ * =============================================
+ * Gmail
+ * =============================================
+ */
+export type GmailMessage = GoogleAppsScript.Gmail.GmailMessage;

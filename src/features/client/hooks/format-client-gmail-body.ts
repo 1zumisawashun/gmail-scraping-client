@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 import { skills, workStyles } from '@/features/client/client.constant';
-
+import { GmailMessage } from '@/functions/types/GoogleAppsScript';
 /**
  * @description 「期間」に部分一致する場合、該当箇所から改行するまでの一文を取得する
  * @description startDateとendDateで区切れればなお良い？chatGPT使った方が良いかも。
  */
 const getPeriod = (body: string) => {
-  return body.includes('期間') ? body.split('期間')[1].split('\r\n')[0] : '×';
+  // TODO:期間の抽出精度を高める
+  return body.includes('期間') ? body.split('期間')[1].split('\n')[0] : '×';
 };
 
 const getWorkStyle = (body: string) => {
@@ -41,7 +42,13 @@ const getOwner = (body: string) => {
   return '×';
 };
 
-export const formatClientGmailBody = ({ body }: { body: string }) => {
+export const formatClientGmailBody = ({
+  message,
+}: {
+  message: GmailMessage;
+}) => {
+  const body = message.getPlainBody();
+
   const period = getPeriod(body);
   const workStyle = getWorkStyle(body);
   const foreigner = getForeigner(body);

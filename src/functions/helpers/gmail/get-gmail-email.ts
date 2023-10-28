@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 import { angleBracketPattern, emailPattern } from '@/functions/constants';
+import { GmailMessage } from '@/functions/types/GoogleAppsScript';
 
-export const getGmailEmail = ({ from }: { from: string }) => {
+// NOTE:汎用的に使えるので（ドメインが入っていないので）helperに置く
+export const getGmailEmail = ({ message }: { message: GmailMessage }) => {
+  const from = message.getFrom();
   const angleBracketMatches = from.match(angleBracketPattern);
 
   if (angleBracketMatches) {

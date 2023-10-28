@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import {
-  formatDateTime,
-  formatDateFullYearMonthDate,
-  getToday,
-} from '@/functions/helpers';
 import { Gmail } from '@/features/client/client.type';
 import { getGmailEmail } from '@/functions/helpers/gmail';
-import { formatClientGmailBody } from '@/features/client/hooks';
+import {
+  formatClientGmailBody,
+  formatClientGmailCategory,
+  formatClientGmailDate,
+} from '@/features/client/hooks';
 
 /* eslint-disable */
 export function getClientGmail() {
@@ -32,48 +31,29 @@ export function getClientGmail() {
 
   messagesForThreads.forEach(thread => {
     thread.forEach(message => {
-      const date = message.getDate();
-      const strDate = formatDateFullYearMonthDate({ date });
-      const strTime = formatDateTime({ date });
+      const subject = message.getSubject();
+      const permalink = message.getThread().getPermalink();
 
-      const from = message.getFrom();
-      const email = getGmailEmail({ from });
+      const email = getGmailEmail({ message });
+
+      const { date, time, isTodayMail } = formatClientGmailDate({ message });
+      const { period, workStyle, foreigner, owner, skill } =
+        formatClientGmailBody({ message });
+      const category = formatClientGmailCategory({ message });
+
+      message.markRead(); // NOTE:既読にする
+
       if ('noreply-apps-scripts-notifications@google.com'.includes(email))
         return undefined;
 
-      const subject = message.getSubject();
-      const attachments = message.getAttachments();
-      const permalink = message.getThread().getPermalink();
-
-      // NOTE:期間に部分一致する一行を取得する
-      // let message = body.match(/：([\s\S]*)/);
-      const body = message.getPlainBody();
-      const { period, workStyle, foreigner, owner, skill } =
-        formatClientGmailBody({ body });
-
-      // NOTE:「要員情報」や「要員のご提案」・エクセルやpdfの添付があるメールは人・それ以外は案件
-      const hasPerson = subject.includes('要員');
-      const hasAttachments = attachments.length !== 0;
-
-      message.markRead(); // 既読にする
-
-      const category = () => {
-        if (hasPerson) return '×';
-        if (hasAttachments) return '×';
-        return '⚪︎';
-      };
-
-      // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
-      const isTodayMail = strDate === getToday();
-
       const params = isTodayMail
         ? {
-            date: strDate,
-            time: strTime,
+            date,
+            time,
             email,
             subject,
             permalink,
-            category: category(),
+            category,
             skill,
             period,
             workStyle,

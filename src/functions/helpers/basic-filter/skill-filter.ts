@@ -15,9 +15,13 @@
  */
 import { getSpreadsheetByName } from '@/functions/helpers/spreadsheet';
 import { sendToSlack } from '@/functions/helpers/slack';
+import {
+  BatchUpdateSpreadsheetRequest,
+  Request,
+} from '@/functions/types/GoogleAppsScript';
 
-export const skillFilter = () => {
-  const spreadsheet = getSpreadsheetByName({ name: 'Sample' });
+export const skillFilter = ({ name = 'Sample' }: { name: string }) => {
+  const spreadsheet = getSpreadsheetByName({ name });
   if (!spreadsheet) {
     sendToSlack('spreadsheetが見つからなかったワン🐶');
     return;
@@ -37,7 +41,7 @@ export const skillFilter = () => {
    * @description basicFilterの型定義
    * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets?hl=ja#BasicFilter
    */
-  const setBasicFilterRequest = {
+  const setBasicFilterRequest: Request = {
     setBasicFilter: {
       filter: {
         range: {
@@ -52,7 +56,7 @@ export const skillFilter = () => {
     },
   };
 
-  const batchUpdateParams = {
+  const batchUpdateParams: BatchUpdateSpreadsheetRequest = {
     requests: [setBasicFilterRequest],
   };
 

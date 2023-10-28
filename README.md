@@ -13,15 +13,16 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
+
 # gmail-scraping-client
 
 gmail-scraping-clientのリポジトリです
 
 ## Overview
 
-- Google Apps ScriptでGmailをスクレイピングをします
-- スクレイピングしたGmailの情報をスプシに転記しDBを作ります
-- DBから条件によって取得したいメールを出し訳します
+- Google Apps Scriptを使ってGmailをスクレイピングし、フォーマットを加えてGoogle Spread Sheetに転記します
+- SESの案件詳細メールは企業によってメールフォーマットが異なるので均しの実装を加えています
+- 期待値はIT人材調達プラットフォーム[Ohgi](https://www.ohgi.io/)のような検索システムです
 
 ## Installation
 
@@ -41,7 +42,6 @@ $ npm install
 - 上記の手順で失敗する場合 [Troubleshoot](#Troubleshoot)を確認してください
 
 ## How to
-
 
 ```bash
 $ npm run lint

@@ -13,10 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { GmailMessage } from '@/functions/types/GoogleAppsScript';
+import {
+  formatDateTime,
+  formatDateFullYearMonthDate,
+  getToday,
+} from '@/functions/helpers';
 
-export { getClientGmail } from './get-client-gmail';
-export { getClientSheet } from './get-client-sheet';
-export { updateSheetByGmail } from './update-sheet-by-gmail';
-export { formatClientGmailBody } from './format-client-gmail-body';
-export { formatClientGmailCategory } from './format-client-gmail-category';
-export { formatClientGmailDate } from './format-client-gmail-date';
+export const formatClientGmailDate = ({
+  message,
+}: {
+  message: GmailMessage;
+}) => {
+  const date = formatDateFullYearMonthDate({ date: message.getDate() });
+  const time = formatDateTime({ date: message.getDate() });
+
+  // NOTE:取得するのは今日の日付のメールのみで別日のスレッドは弾く
+  const isTodayMail = date === getToday();
+
+  return { date, time, isTodayMail };
+};
